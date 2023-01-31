@@ -3,10 +3,10 @@ from GippsModel import GippsModel
 from guiControls import App
 from tkinter import *
 from threading import Thread
-import time
 from vars import Vars
 import csv
 import os
+from datetime import datetime
 
 def insert_into_csv(data):
     if not os.path.exists("plot.csv"):
@@ -46,52 +46,49 @@ class ModelRunner(Thread):
         # assigning car followers
         for i in range(len(cars)-1):
             cars[i].follower = cars[i+1]
+            # creating csv file header
             header.append(f"Car {i+1}")
 
         header.append(f"Car {i+2}")
 
         insert_into_csv(header)
 
+        # craeting time steps for plot creation
+        self.lastCheckPoint = datetime.now()
+        self.initialCheckPoint = datetime.now()
+
     def run(self):
 
-        steps = 0
-        c = 0
-        # previous value to print every 10 units of speed 
-        prev = 0
         while True:
 
             # car id
-            counter = 1
+            id = 1
             for car in self.cars:
-                if(abs(self.model.get_speed(car)-prev)>10) and counter==1:
-                    prev = self.model.get_speed(car)
-                    print(f"car {counter} speed is: "+str(self.model.get_speed(car))+"\n")
 
                 # saving to log
                 f = open(self.log, "a")
-                f.write(f"car {counter} speed "+str(self.model.get_speed(car))+"\n")
+                f.write(f"car {id} speed "+str(self.model.get_speed(car))+"\n")
                 f.close()
 
                 # updating car info and counter id
                 car.update()
-                Vars.speeds[counter-1] = self.model.get_speed(car)
+                Vars.speeds[id-1] = self.model.get_speed(car)
 
-                counter+=1
+                id+=1
 
-
-            c+=1
-
-            if c>100:
-                data = [steps]
-                for speed in Vars.speeds:
-                    data.append(speed)
+            current = datetime.now()
+            if (current - self.lastCheckPoint).total_seconds() >= 0.5:
+                data = [(current - self.initialCheckPoint).total_seconds()]
+                for i in range(len(Vars.speeds)):
+                    print(f"car {i+1} speed "+str(Vars.speeds[i])+"\n")
+                    data.append(Vars.speeds[i])
                 insert_into_csv(data)
-                steps+=1
-                c=0
+                self.lastCheckPoint = datetime.now()
 
 
 
 def main():
+
     model = GippsModel()
     car1 = Gipps_Vehicle(0, 50, model, None)
     car2 = Gipps_Vehicle(1, 50, model, car1)

@@ -18,7 +18,6 @@ class CarControl:
         self.intended_speed = new_speed
 
     def start_sudden_breaking(self,id,elemid):
-
         if self.breaking:
             self.car.stop_sundden_braking()
             self.breaking = False
@@ -159,19 +158,22 @@ class App:
         last = 0
         global carUIElements
         carUIElements = []
+        global car_controls
+        car_controls = []
         for i in range(len(self.cars)):
 
             car_control = CarControl(self.cars[i], self.model)
+            car_controls.append(car_control)
 
             carUIElements.append([tk.Label(master, text=f"Car {i+1} Intended Speed")])
             carUIElements[i][0].grid(row=last+i, column=2)
 
             speed = tk.IntVar()
-            carUIElements[i].append(tk.Scale(master, from_=0.1, to=260, resolution=1, orient='horizontal', variable=speed, command = car_control.update_intended_speed))
+            carUIElements[i].append(tk.Scale(master, from_=0.1, to=260, resolution=1, orient='horizontal', variable=speed, command = car_controls[i].update_intended_speed))
             carUIElements[i][1].grid(row=last+1+i, column=2)
-            carUIElements[i][1].set(car_control.intended_speed)
+            carUIElements[i][1].set(car_controls[i].intended_speed)
 
-            carUIElements[i].append(tk.Button(master, text="Sudden Break", command=lambda c=i:car_control.start_sudden_breaking(c,2)))
+            carUIElements[i].append(tk.Button(master, text="Sudden Break", command=lambda c=i:car_controls[c].start_sudden_breaking(c,2)))
             carUIElements[i][2].grid(row=last+2+i, column=2)
 
             last = last+2+i

@@ -1,20 +1,19 @@
 class Vars:
     # Model Parameters
-    Greatest_speed_reduction = 0.1
+    Greatest_speed_reduction = 0.5
     Zone_of_influence_upstream = 50 / 3
     Zone_of_influence_downstream = 10 / 3
 
     # Vehicle Parameters
-    length = 5
-    miniGap = 2
+    length = 20
+    miniGap = 20
     initialMaxBraking = False
 
     # GIPPS Vehicle Parameters
-    driver_reaction_time = 3 / 3
+    driver_reaction_time = 4 / 3
     randomness = False
     max_acceleration = 0.01
-    efffective_size = 7
+    efffective_size = length + miniGap
 
     # Plot parameters
-    step_num = 0
     speeds = []
