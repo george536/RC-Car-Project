@@ -21,13 +21,15 @@ def insert_into_csv(data):
 
 # Multithreaded call for app GUI
 class AppRunner(Thread):
-    def __init__(self):
+    def __init__(self, cars, model):
         super().__init__()
         self.app = None
+        self.cars = cars
+        self.model = model
 
     def run(self):
         # GUI init
-        self.app = App(Tk())
+        self.app = App(Tk(), self.cars, self.model)
 
 # Multithreaded call for updating the cars
 class ModelRunner(Thread):
@@ -51,15 +53,12 @@ class ModelRunner(Thread):
         insert_into_csv(header)
 
     def run(self):
-        # num of updates since beginning
-        num_updates = 0
+
         steps = 0
         c = 0
         # previous value to print every 10 units of speed 
         prev = 0
         while True:
-
-            num_updates+=1
 
             # car id
             counter = 1
@@ -79,11 +78,6 @@ class ModelRunner(Thread):
 
                 counter+=1
 
-                # change cars speed
-                if counter==2 and num_updates>10000 and self.model.get_speed(car)>48:
-                    print("############# changing speed ############")
-                    num_updates = 0
-                    car.max_v = 30
 
             c+=1
 
@@ -109,7 +103,7 @@ def main():
 
     threads = []
 
-    appRunner = AppRunner()
+    appRunner = AppRunner(cars,model)
     threads.append(appRunner)
 
     modelRunner = ModelRunner(model,cars)

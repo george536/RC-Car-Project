@@ -1,5 +1,5 @@
 from Vehicle import Vehicle
-from numpy import random as random
+# from numpy import random as random
 from vars import Vars as v
 
 class Gipps_Vehicle(Vehicle):
