@@ -45,7 +45,7 @@ class Gipps_Vehicle(Vehicle):
 
     def update(self):
         self.base_update()
-        if self.maxBraking and self.v>0:
+        if self.maxBraking:
             new_a = self.bn # new_acceleration = self.desired_braking
             new_v = self.v + self.tn/2 * (self.a + new_a)
         else:

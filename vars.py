@@ -6,13 +6,13 @@ class Vars:
 
     # Vehicle Parameters
     length = 20
-    miniGap = 20
+    miniGap = 10
     initialMaxBraking = False
 
     # GIPPS Vehicle Parameters
-    driver_reaction_time = 4 / 3
+    driver_reaction_time = 3 / 3
     randomness = False
-    max_acceleration = 0.01
+    max_acceleration = 1.7
     efffective_size = length + miniGap
 
     # Plot parameters

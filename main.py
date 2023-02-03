@@ -7,6 +7,7 @@ from vars import Vars
 import csv
 import os
 from datetime import datetime
+import time
 
 def insert_into_csv(data):
     if not os.path.exists("plot.csv"):
@@ -60,15 +61,15 @@ class ModelRunner(Thread):
     def run(self):
 
         while True:
-
+            time.sleep(0.3)
             # car id
             id = 1
             for car in self.cars:
 
                 # saving to log
-                f = open(self.log, "a")
-                f.write(f"car {id} speed "+str(self.model.get_speed(car))+"\n")
-                f.close()
+                #f = open(self.log, "a")
+                #f.write(f"car {id} speed "+str(self.model.get_speed(car))+"\n")
+                #f.close()
 
                 # updating car info and counter id
                 car.update()
@@ -90,9 +91,9 @@ class ModelRunner(Thread):
 def main():
 
     model = GippsModel()
-    car1 = Gipps_Vehicle(0, 50, model, None)
-    car2 = Gipps_Vehicle(1, 50, model, car1)
-    car3 = Gipps_Vehicle(2, 50, model, car2)
+    car1 = Gipps_Vehicle(1, 50, model, None)
+    car2 = Gipps_Vehicle(2, 50, model, car1)
+    car3 = Gipps_Vehicle(3, 50, model, car2)
 
     cars = [car1,car2,car3]
 
