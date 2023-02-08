@@ -1,6 +1,5 @@
-import sys
-sys.path.append("/home/pi/Documents/RcCode/RcCarModules")
-from Motor import *
+
+from RcCarModules.Motor import *
 
 class CarCommands:
 	

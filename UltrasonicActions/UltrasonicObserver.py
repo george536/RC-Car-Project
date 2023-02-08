@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-import sys
-sys.path.append("/home/pi/Documents/RcCode/RcCarModules")
-from Ultrasonic import *
-from Motor import *
+from RcCarModules 
+from RcCarModules.Ultrasonic import *
+from RcCarModules.Motor import *
 
 class UltrasonicObserver(ABC):
 	
