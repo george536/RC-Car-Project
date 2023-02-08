@@ -1,6 +1,5 @@
 import time
-import sys
-sys.path.append("/home/pi/Documents/RcCode/RcCarModules")
+from Positions import Position
 from Motor import *
 import RPi.GPIO as GPIO
 class Line_Tracking:
@@ -12,6 +11,17 @@ class Line_Tracking:
         GPIO.setup(self.IR01,GPIO.IN)
         GPIO.setup(self.IR02,GPIO.IN)
         GPIO.setup(self.IR03,GPIO.IN)
+        
+    def getPosition(self):
+        for position in list(Position):
+            if self.LMR == position.value:
+                return position
+                
+        return position.Failed
+    
+    def test(self):
+        print("test")
+    
     def run(self):
         while True:
             self.LMR=0x00
@@ -40,12 +50,14 @@ class Line_Tracking:
                 print(self.LMR)
                 #pass
                 #PWM.setMotorModel(0,0,0,0)
-            
-infrared=Line_Tracking()
+
+                
+#infrared=Line_Tracking()
 # Main program logic follows:
-if __name__ == '__main__':
-    print ('Program is starting ... ')
-    try:
-        infrared.run()
-    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
-        PWM.setMotorModel(0,0,0,0)
+#if __name__ == '__main__':
+#    print ('Program is starting ... ')
+ #   try:
+  #      #infrared.run()
+   #     pass
+    #except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
+     #   PWM.setMotorModel(0,0,0,0)

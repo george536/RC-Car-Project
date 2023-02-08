@@ -1,12 +1,17 @@
 from CarControls.CarCommands import CarCommands
 from UltrasonicActions.CollisionDetection import CollisionDetection 
-from UltrasonicActions.ObserverManager import ObserverManager 
+from UltrasonicActions.ObserverManager import ObserverManager as UltrasonicManager
+from PathTracking.LaneCentering import LaneCentering
+from PathTracking.ObserverManager import ObserverManager as PathManager
 from threading import Thread
 import time
+
+# driving scenario thread
 class DrivingScenario(Thread):
-	def __init__(self,collisionObserver):
+	def __init__(self,ultrasonicManager):
 		super().__init__()
-		self.ctrl = CarCommands(collisionObserver)
+		# ultrasonicManager manager is the observer that checks for emergency stops
+		self.ctrl = CarCommands(ultrasonicManager)
 		
 	def run(self):
 		#self.ctrl.changeSpeed(500,2000,50,0.1)
@@ -19,21 +24,36 @@ class DrivingScenario(Thread):
 		#self.ctrl.stop()
 		
 class detectCollision(Thread):
-	def __init__(self,observerManager):
+	def __init__(self,ultrasonicManager):
 		super().__init__()
 		
-		self.observerManager = observerManager
+		self.observerManager = ultrasonicManager
 		CollisionDetection(self.observerManager)
 		
 	def run(self):
 	
 		while True:
 			self.observerManager.notifyAllObservers()
+
+
+class TrackingPath(Thread):
+	def __init__(self,observerManager,ultrasonicManager):
+		super().__init__()
+
+		self.observerManager = observerManager
+		LaneCentering(self.observerManager,ultrasonicManager)
+
+	def run(self):
+		while True:
+			self.observerManager.notifyAllObservers()
 			
 threads = []
-observerManager = ObserverManager()
-threads.append(DrivingScenario(observerManager))
-threads.append(detectCollision(observerManager))
+ultrasonicManager = UltrasonicManager()
+pathManager = PathManager()
+
+threads.append(DrivingScenario(ultrasonicManager))
+threads.append(detectCollision(ultrasonicManager))
+threads.append(TrackingPath(pathManager,ultrasonicManager))
 
 
 for thread in threads:
