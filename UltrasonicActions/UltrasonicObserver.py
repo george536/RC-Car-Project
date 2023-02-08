@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from RcCarModules 
 from RcCarModules.Ultrasonic import *
 from RcCarModules.Motor import *
 

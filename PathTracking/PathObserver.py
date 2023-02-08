@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Line_Tracking import *
+from RcCarModules.Line_Tracking import *
 
 class PathObserver(ABC):
 	
