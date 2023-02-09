@@ -2,7 +2,7 @@
 from enum import Enum
 
 class Position(Enum):
-    Middle = 1
-    Left = 2
-    Right = 3
-    Failed = 4
+    Middle = 2
+    Left = 4
+    Right = 1
+    Failed = 0

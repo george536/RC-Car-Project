@@ -5,6 +5,9 @@ from PathTracking.LaneCentering import LaneCentering
 from PathTracking.ObserverManager import ObserverManager as PathManager
 from threading import Thread
 import time
+import sys
+import os
+from RcCarModules.Motor import *
 
 # driving scenario thread
 class DrivingScenario(Thread):
@@ -19,8 +22,10 @@ class DrivingScenario(Thread):
 		#self.ctrl.changeSpeed(500,2000,100,0.1)
 		#self.ctrl.turn(90)
 		#self.ctrl.changeSpeed(2000,500,100,0.1)
-		while True:
-			self.ctrl.DriveForward(3000)
+            while True:
+                
+                self.ctrl.DriveForward(500)
+
 		#self.ctrl.stop()
 		
 class detectCollision(Thread):
@@ -46,22 +51,32 @@ class TrackingPath(Thread):
 	def run(self):
 		while True:
 			self.observerManager.notifyAllObservers()
-			
-threads = []
-ultrasonicManager = UltrasonicManager()
-pathManager = PathManager()
+		
+def main():
+    threads = []
+    ultrasonicManager = UltrasonicManager()
+    pathManager = PathManager()
 
-threads.append(DrivingScenario(ultrasonicManager))
-threads.append(detectCollision(ultrasonicManager))
-threads.append(TrackingPath(pathManager,ultrasonicManager))
+    #threads.append(DrivingScenario(ultrasonicManager))
+    threads.append(detectCollision(ultrasonicManager))
+    threads.append(TrackingPath(pathManager,ultrasonicManager))
 
 
-for thread in threads:
-	thread.start()
+    for thread in threads:
+        thread.start()
 
-for thread in threads:
-	thread.join()
+    for thread in threads:
+        thread.join()
 
+
+try: 
+    main()
+except KeyboardInterrupt:
+    PWM.setMotorModel(0,0,0,0)
+    try:
+        sys.exit(130)
+    except SystemExit:
+        os._exit(130)
 
 
 
