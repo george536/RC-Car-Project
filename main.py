@@ -71,7 +71,7 @@ def main():
 
 try: 
     main()
-except KeyboardInterrupt:
+except:
     PWM.setMotorModel(0,0,0,0)
     PWM.setMotorModel(0,0,0,0)
     PWM.setMotorModel(0,0,0,0)
