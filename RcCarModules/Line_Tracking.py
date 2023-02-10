@@ -25,7 +25,15 @@ class Line_Tracking:
     def run(self):
         #while True:
         speed = 1000
-        
+
+        boundry1 = speed * 1.5
+        if boundry1>4096:
+            boundry1 = 4096
+
+        boundry2 = speed * 2.5
+        if boundry2>4096:
+            boundry2 = 4096
+
         self.LMR=0x00
         if GPIO.input(self.IR01)==True:
             self.LMR=(self.LMR | 4)
@@ -37,16 +45,18 @@ class Line_Tracking:
         if self.LMR==Position.Middle.value:
             PWM.setMotorModel(-speed,-speed,-speed,-speed)
         elif self.LMR==Position.Left.value:
-            PWM.setMotorModel(1500,1500,-2500,-2500)
+            PWM.setMotorModel(boundry1,boundry1,-boundry2,-boundry2)
         # elif self.LMR==6:
         #     return
         #     PWM.setMotorModel(2000,2000,-4000,-4000)
         elif self.LMR==Position.Right.value:
-            PWM.setMotorModel(-2500,-2500,1500,1500)
+            PWM.setMotorModel(-boundry2,-boundry2,boundry1,boundry1)
         # elif self.LMR==3:
         #     return
         #     PWM.setMotorModel(-4000,-4000,2000,2000)
         elif self.LMR==7:
+            PWM.setMotorModel(0,0,0,0)
+            PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
 

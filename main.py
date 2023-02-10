@@ -74,6 +74,8 @@ try:
 except:
     PWM.setMotorModel(0,0,0,0)
     PWM.setMotorModel(0,0,0,0)
+	PWM.setMotorModel(0,0,0,0)
+    PWM.setMotorModel(0,0,0,0)
 
     try:
         sys.exit(130)
