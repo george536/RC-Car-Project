@@ -2,6 +2,7 @@ import time
 from PathTracking.Positions import Position
 from .Motor import *
 import RPi.GPIO as GPIO
+
 class Line_Tracking:
     def __init__(self):
         self.IR01 = 14
@@ -31,20 +32,19 @@ class Line_Tracking:
         if GPIO.input(self.IR03)==True:
             self.LMR=(self.LMR | 1)
             
-        if self.LMR==2:
+        if self.LMR==Position.Middle.value:
             PWM.setMotorModel(-1000,-1000,-1000,-1000)
-        elif self.LMR==4:
+        elif self.LMR==Position.Left.value:
             PWM.setMotorModel(1500,1500,-2500,-2500)
         elif self.LMR==6:
+            return
             PWM.setMotorModel(2000,2000,-4000,-4000)
-        elif self.LMR==1:
+        elif self.LMR==Position.Right.value:
             PWM.setMotorModel(-2500,-2500,1500,1500)
         elif self.LMR==3:
+            return
             PWM.setMotorModel(-4000,-4000,2000,2000)
         elif self.LMR==7:
-            #pass
-            PWM.setMotorModel(0,0,0,0)
-            PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
 
