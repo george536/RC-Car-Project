@@ -24,8 +24,7 @@ class LeadCarDetection(UltrasonicObserver):
 		    self.last_d=d
 		    self.last_t=t
 
-		    if abs(speed-self.lastSpeed)<25:
-		        print(speed)
+		    print(speed)
 
 		    self.lastSpeed = speed
 
