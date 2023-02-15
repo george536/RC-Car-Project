@@ -11,6 +11,7 @@ class LeadCarDetection(UltrasonicObserver):
 		self.minimum = 50 # default minimum distance
 		self.last_d = 0
 		self.last_t = 0
+        self.lastSpeed = 0
 		
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
@@ -23,4 +24,10 @@ class LeadCarDetection(UltrasonicObserver):
 		    self.last_d=d
 		    self.last_t=t
 
-		    print(speed)
+		    if abs(speed-self.lastSpeed)<15:
+		        print(speed)
+
+		    self.lastSpeed = speed
+
+
+		    
