@@ -18,8 +18,8 @@ class LeadCarDetection(UltrasonicObserver):
 		    d= ultrasonic.get_distance()
 		    t = time.time()
 
-		    speed = (d-self.last_d)/(t-self.last_t)
-
+		    speed = (10**-2)*(d-self.last_d)/(t-self.last_t)
+		    speed=int(speed)
 		    self.last_d=d
 		    self.last_t=t
 
