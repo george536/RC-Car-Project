@@ -3,6 +3,7 @@ from UltrasonicActions.CollisionDetection import CollisionDetection
 from UltrasonicActions.ObserverManager import ObserverManager as UltrasonicManager
 from PathTracking.LaneCentering import LaneCentering
 from PathTracking.ObserverManager import ObserverManager as PathManager
+import HelperFunctions.SpeedScale as speedScale
 from threading import Thread
 import time
 import sys
@@ -48,7 +49,7 @@ class TrackingPath(Thread):
 # to be replaced
 class car:
 	def __init__(self):
-		self.speed = 500
+		self.speed = speedScale.scaleToRC(100)
 
 	def getSpeed(self):
 		return self.speed
