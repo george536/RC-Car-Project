@@ -42,6 +42,10 @@ class Line_Tracking:
             PWM.setMotorModel(boundry1,boundry1,-boundry2,-boundry2)
         elif self.LMR==Position.Right.value:
             PWM.setMotorModel(-boundry2,-boundry2,boundry1,boundry1)
+        elif self.LMR==6:
+            PWM.setMotorModel(2000,2000,-4000,-4000)
+        elif self.LMR==3:
+            PWM.setMotorModel(-4000,-4000,2000,2000)
         else:
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
