@@ -8,13 +8,13 @@ class LeadCarDetection(UltrasonicObserver):
 		self.observerManager = observerManager
 		observerManager.attach(self)
 		self.likelyhood = 0
-		self.minimum = 50 # default minimum distance
+		self.maxDistance = 4*20 # default minimum distance
 		self.last_d = 0
 		self.last_t = 0
 		self.lastSpeed = 0
 		
 	def update(self):
-		if ultrasonic.get_distance() <=self.minimum:
+		if ultrasonic.get_distance() <=self.maxDistance:
             
 		    d= ultrasonic.get_distance()
 		    t = time.time()
