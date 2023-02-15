@@ -62,8 +62,8 @@ def main():
     pathManager = PathManager()
     egoCar = car()
 
-    threads.append(DrivingScenario(ultrasonicManager))
-    #threads.append(detectCollision(ultrasonicManager))
+    #threads.append(DrivingScenario(ultrasonicManager))
+    threads.append(detectCollision(ultrasonicManager))
     threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
 
 
