@@ -74,7 +74,7 @@ def main():
 try: 
     main()
 except Exception as e:
-	print(e)
+    print(e)
     PWM.setMotorModel(0,0,0,0)
     PWM.setMotorModel(0,0,0,0)
     PWM.setMotorModel(0,0,0,0)
