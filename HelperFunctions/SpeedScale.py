@@ -9,7 +9,7 @@ def scaleToRC(speed):
 
     scaledSpeed = speed*factor + 400
 
-    return scaledSpeed
+    return int(scaledSpeed)
 
     
 
