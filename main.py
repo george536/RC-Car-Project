@@ -18,8 +18,8 @@ class DrivingScenario(Thread):
 		self.ctrl = CarCommands(ultrasonicManager)
 		
 	def run(self):
-            while True:
-                self.ctrl.DriveForward(500)
+            #while True:
+            self.ctrl.DriveForward(500)
 		
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
@@ -59,8 +59,8 @@ def main():
     pathManager = PathManager()
     egoCar = car()
 
-    #threads.append(DrivingScenario(ultrasonicManager))
-    threads.append(detectCollision(ultrasonicManager))
+    threads.append(DrivingScenario(ultrasonicManager))
+    #threads.append(detectCollision(ultrasonicManager))
     threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
 
 
