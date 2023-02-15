@@ -51,7 +51,7 @@ class TrackingPath(Thread):
 # to be replaced
 class car:
 	def __init__(self):
-		self.speed = speedScale.scaleToRC(100)
+		self.speed = speedScale.scaleToRC(30)
 
 	def getSpeed(self):
 		return self.speed
