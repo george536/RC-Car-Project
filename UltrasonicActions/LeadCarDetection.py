@@ -10,7 +10,7 @@ class LeadCarDetection(UltrasonicObserver):
 		self.likelyhood = 0
 		self.maxDistance = 4*20 # default minimum distance
 		self.last_d = 0
-		self.last_t = 0
+		self.last_t = time.time()
 		self.lastSpeed = 0
 		
 	def update(self):
