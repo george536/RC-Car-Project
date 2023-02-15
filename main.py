@@ -39,7 +39,7 @@ class TrackingPath(Thread):
 		super().__init__()
 
 		self.observerManager = observerManager
-		LaneCentering(self.observerManager,ultrasonicManage,egoCar)
+		LaneCentering(self.observerManager,ultrasonicManager,egoCar)
 
 	def run(self):
 		while True:
