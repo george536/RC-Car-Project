@@ -9,6 +9,7 @@ import sys
 import os
 from RcCarModules.Motor import *
 
+
 # driving scenario thread
 class DrivingScenario(Thread):
 	def __init__(self,ultrasonicManager):
@@ -17,16 +18,8 @@ class DrivingScenario(Thread):
 		self.ctrl = CarCommands(ultrasonicManager)
 		
 	def run(self):
-		#self.ctrl.changeSpeed(500,2000,50,0.1)
-		#self.ctrl.changeSpeed(2000,500,50,0.1)
-		#self.ctrl.changeSpeed(500,2000,100,0.1)
-		#self.ctrl.turn(90)
-		#self.ctrl.changeSpeed(2000,500,100,0.1)
             while True:
-                
                 self.ctrl.DriveForward(500)
-
-		#self.ctrl.stop()
 		
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
@@ -42,24 +35,33 @@ class detectCollision(Thread):
 
 
 class TrackingPath(Thread):
-	def __init__(self,observerManager,ultrasonicManager):
+	def __init__(self,observerManager,ultrasonicManager,egoCar):
 		super().__init__()
 
 		self.observerManager = observerManager
-		LaneCentering(self.observerManager,ultrasonicManager)
+		LaneCentering(self.observerManager,ultrasonicManage,egoCar)
 
 	def run(self):
 		while True:
 			self.observerManager.notifyAllObservers()
+
+# to be replaced
+class car:
+	def __init__(self):
+		self.speed = 500
+
+	def getSpeed(self):
+		return self.speed
 		
 def main():
     threads = []
     ultrasonicManager = UltrasonicManager()
     pathManager = PathManager()
+    egoCar = car()
 
     #threads.append(DrivingScenario(ultrasonicManager))
     threads.append(detectCollision(ultrasonicManager))
-    threads.append(TrackingPath(pathManager,ultrasonicManager))
+    threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
 
 
     for thread in threads:

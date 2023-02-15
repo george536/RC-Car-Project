@@ -13,18 +13,8 @@ class Line_Tracking:
         GPIO.setup(self.IR02,GPIO.IN)
         GPIO.setup(self.IR03,GPIO.IN)
         
-    def getPosition(self):
-        self.run()
-        return 
-        for position in list(Position):
-            if self.LMR == position.value:
-                return position
-                
-        return position.Failed
     
-    def run(self):
-        #while True:
-        speed = 1000
+    def run(self,speed):
 
         boundry1 = speed * 1.5
         if boundry1>4096:
@@ -50,27 +40,11 @@ class Line_Tracking:
             PWM.setMotorModel(-speed,-speed,-speed,-speed)
         elif self.LMR==Position.Left.value:
             PWM.setMotorModel(boundry1,boundry1,-boundry2,-boundry2)
-        # elif self.LMR==6:
-        #     return
-        #     PWM.setMotorModel(2000,2000,-4000,-4000)
         elif self.LMR==Position.Right.value:
             PWM.setMotorModel(-boundry2,-boundry2,boundry1,boundry1)
-        # elif self.LMR==3:
-        #     return
-        #     PWM.setMotorModel(-4000,-4000,2000,2000)
         elif self.LMR==7:
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
             PWM.setMotorModel(0,0,0,0)
 
-                
-#infrared=Line_Tracking()
-# Main program logic follows:
-#if __name__ == '__main__':
-#    print ('Program is starting ... ')
- #   try:
-  #      #infrared.run()
-   #     pass
-    #except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
-     #   PWM.setMotorModel(0,0,0,0)
