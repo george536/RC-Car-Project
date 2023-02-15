@@ -5,7 +5,7 @@ from RcCarModules.Motor import *
 
 class LaneCentering(PathObserver):
 	
-	def __init__(self,observerManager,ultrasonicManager):
+	def __init__(self,observerManager,ultrasonicManager,egoCar):
 		super().__init__(ultrasonicManager,egoCar)
 		self.observerManager = observerManager
 		observerManager.attach(self)
