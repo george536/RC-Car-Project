@@ -21,7 +21,7 @@ class DrivingScenario(Thread):
 		
 	def run(self):
             #while True:
-            self.ctrl.DriveForward(speedScale.scaleToRC(100))
+            self.ctrl.DriveForward(speedScale.scaleToRC(30))
 		
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
