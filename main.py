@@ -1,6 +1,6 @@
 from CarControls.CarCommands import CarCommands
 from UltrasonicActions.CollisionDetection import CollisionDetection 
-from UltrasonicActions.LeadCarDetection import LeadCarDetection 
+#from UltrasonicActions.LeadCarDetection import LeadCarDetection 
 from UltrasonicActions.ObserverManager import ObserverManager as UltrasonicManager
 from PathTracking.LaneCentering import LaneCentering
 from PathTracking.ObserverManager import ObserverManager as PathManager
@@ -29,7 +29,7 @@ class detectCollision(Thread):
 		
 		self.observerManager = ultrasonicManager
 		CollisionDetection(self.observerManager)
-		LeadCarDetection(self.observerManager)
+		#LeadCarDetection(self.observerManager)
 		
 	def run(self):
 	
@@ -62,9 +62,9 @@ def main():
     pathManager = PathManager()
     egoCar = car()
 
-    threads.append(DrivingScenario(ultrasonicManager))
+    #threads.append(DrivingScenario(ultrasonicManager))
     threads.append(detectCollision(ultrasonicManager))
-    #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
+    threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
 
 
     for thread in threads:
