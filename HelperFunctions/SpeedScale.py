@@ -1,15 +1,15 @@
+import ScalingParameters.ScalingParameters
+
 def scaleToRC(speed):
-    # 4096 is max
-    # 120 km/hr is max
-    max_car_speed = 120
-    factor = (4096-400)/max_car_speed
 
-    if speed >max_car_speed:
-        return 4096
+    if speed >ScalingParameters.max_car_speed:
+        return ScalingParameters.max_RC_PWM
 
-    scaledSpeed = speed*factor + 400
+    factor = (ScalingParameters.max_RC_PWM-ScalingParameters.min_RC_PWM)/ScalingParameters.max_car_speed
 
-    if scaledSpeed==400:
+    scaledSpeed = speed*factor + ScalingParameters.min_RC_PWM
+    
+    if scaledSpeed==ScalingParameters.min_RC_PWM:
         return 0
 
     return int(scaledSpeed)
