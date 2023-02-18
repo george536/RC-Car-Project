@@ -82,6 +82,7 @@ class ModelRunner(Thread):
                 data = [(current - self.initialCheckPoint).total_seconds()]
                 for i in range(len(Vars.speeds)):
                     print(f"car {i+1} speed "+str(Vars.speeds[i])+"\n")
+                    print(f"car {i+1} location "+str(self.cars[i].loc)+"\n")
                     data.append(Vars.speeds[i])
                 insert_into_csv(data)
                 self.lastCheckPoint = datetime.now()
