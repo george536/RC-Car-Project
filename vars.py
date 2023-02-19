@@ -6,7 +6,7 @@ class Vars:
 
     # Vehicle Parameters
     length = 5
-    miniGap = 2
+    miniGap = 4
     initialMaxBraking = False
 
     # GIPPS Vehicle Parameters
@@ -17,3 +17,6 @@ class Vars:
 
     # Plot parameters
     speeds = []
+
+    # stores the recent distance travelled by the cars as sent from each car through mqtt
+    over_mqtt_distances = []

@@ -8,6 +8,8 @@ import csv
 import os
 from datetime import datetime
 import time
+from mqtt import MQTTCommunication
+from topics import Topic
 
 def insert_into_csv(data):
     if not os.path.exists("plot.csv"):
@@ -61,9 +63,9 @@ class ModelRunner(Thread):
     def run(self):
 
         while True:
+            # to be deleted
             time.sleep(0.3)
             # car id
-            id = 1
             for car in self.cars:
 
                 # saving to log
@@ -73,32 +75,48 @@ class ModelRunner(Thread):
 
                 # updating car info and counter id
                 car.update()
-                Vars.speeds[id-1] = self.model.get_speed(car)
-
-                id+=1
+                global mqttClient
+                # send speed commands
+                mqttClient.publish(f"{str(Topic.Main)}/{str(Topic.SPEED)}/{str(car.idx*10)}", payload=str(self.model.get_speed(car)), qos=1)
+                # store speeds to be graphed
+                Vars.speeds[car.idx-1] = self.model.get_speed(car)
+                # update distance recieved
+                car.loc = Vars.over_mqtt_distances[car.idx-1]
 
             current = datetime.now()
             if (current - self.lastCheckPoint).total_seconds() >= 0.5:
                 data = [(current - self.initialCheckPoint).total_seconds()]
                 for i in range(len(Vars.speeds)):
                     print(f"car {i+1} speed "+str(Vars.speeds[i])+"\n")
-                    print(f"car {i+1} location "+str(self.cars[i].loc)+"\n")
+                    #print(f"car {i+1} location "+str(self.cars[i].loc)+"\n")
                     data.append(Vars.speeds[i])
                 insert_into_csv(data)
                 self.lastCheckPoint = datetime.now()
 
+class MQTTRunner(Thread):
+    def __init__(self,mqttClient,cars):
+        super().__init__()
+        self.mqttClient=mqttClient
+        self.cars=cars
 
+    def run(self):
+        for car in self.cars:
+            # listen for distances
+            self.mqttClient.subscribe(f"{str(Topic.Main)}/{str(Topic.DISTANCE)}/{str(car.idx*10)}", qos=1)
+        self.mqttClient.loop_forever()
 
 def main():
 
     model = GippsModel()
-    car1 = Gipps_Vehicle(1, 50, model, None)
-    car2 = Gipps_Vehicle(2, 50, model, car1)
-    car3 = Gipps_Vehicle(3, 50, model, car2)
+    car1 = Gipps_Vehicle(1, 1, model, None)
+    car2 = Gipps_Vehicle(2, 1, model, car1)
+    car3 = Gipps_Vehicle(3, 1, model, car2)
 
     cars = [car1,car2,car3]
 
     Vars.speeds = [0,0,0]
+
+    Vars.over_mqtt_distances = [0,0,0]
 
     threads = []
 
@@ -108,6 +126,12 @@ def main():
     modelRunner = ModelRunner(model,cars)
     threads.append(modelRunner)
 
+    mqtt = MQTTCommunication()
+    global mqttClient
+    mqttClient = mqtt.getClient()
+
+    mqttRunner = MQTTRunner(mqttClient,cars)
+    threads.append(mqttRunner)
 
     for thread in threads:
         thread.start()
