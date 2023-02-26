@@ -77,7 +77,7 @@ class ModelRunner(Thread):
                 car.update()
                 global mqttClient
                 # send speed commands
-                mqttClient.publish(f"{str(Topic.Main)}/{str(Topic.SPEED)}/{str(car.idx*10)}", payload=str(self.model.get_speed(car)), qos=1)
+                mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(car.idx)}", payload=str(self.model.get_speed(car)), qos=1)
                 # store speeds to be graphed
                 Vars.speeds[car.idx-1] = self.model.get_speed(car)
                 # update distance recieved
@@ -102,7 +102,7 @@ class MQTTRunner(Thread):
     def run(self):
         for car in self.cars:
             # listen for distances
-            self.mqttClient.subscribe(f"{str(Topic.Main)}/{str(Topic.DISTANCE)}/{str(car.idx*10)}", qos=1)
+            self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(car.idx)}", qos=1)
         self.mqttClient.loop_forever()
 
 def main():

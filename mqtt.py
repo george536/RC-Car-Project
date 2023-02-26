@@ -4,6 +4,7 @@ import paho.mqtt.client as paho
 from paho import mqtt
 import re
 from vars import Vars as v
+from topics import Topic
 
 class MQTTCommunication:
 
@@ -46,9 +47,9 @@ class MQTTCommunication:
     # print message, useful for checking if it was successful
     def on_message(self,client, userdata, msg):
         # Distance messages
-        distance_pattern = r"Topic.Main/Topic.DISTANCE/$"
+        distance_pattern = fr"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/$"
         if re.search(distance_pattern, msg.topic):
-            v.over_mqtt_distances[int((distance_pattern.split('/')[3])/10)-1] = int(msg.payload.decode())
+            v.over_mqtt_distances[int(distance_pattern.split('/')[3])-1] = int(msg.payload.decode())
 
 
         #print("Message :"+msg.topic + " " + str(msg.qos) + " " + str(msg.payload.decode()))
