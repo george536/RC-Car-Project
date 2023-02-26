@@ -10,18 +10,21 @@ import time
 import sys
 import os
 from RcCarModules.Motor import *
-
+from MQTT.mqtt import MQTTCommunication
+from MQTT.topics import Topic
+from MQTT.CarInfo import CarInfo
 
 # driving scenario thread
 class DrivingScenario(Thread):
-	def __init__(self,ultrasonicManager):
+	def __init__(self,ultrasonicManager,egoCar):
 		super().__init__()
 		# ultrasonicManager manager is the observer that checks for emergency stops
 		self.ctrl = CarCommands(ultrasonicManager)
+		self.egoCar = egoCar
 		
 	def run(self):
             #while True:
-            self.ctrl.DriveForward(speedScale.scaleToRC(10))
+            self.ctrl.DriveForward(speedScale.scaleToRC(self.egoCar.getSpeed()))
 		
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
@@ -48,23 +51,54 @@ class TrackingPath(Thread):
 		while True:
 			self.observerManager.notifyAllObservers()
 
-# to be replaced
-class car:
+class TrackingPath(Thread):
+	def __init__(self,observerManager,ultrasonicManager,egoCar):
+		super().__init__()
+
+		self.observerManager = observerManager
+		LaneCentering(self.observerManager,ultrasonicManager,egoCar)
+
+	def run(self):
+		while True:
+			self.observerManager.notifyAllObservers()
+
+class MQTTRunner(Thread):
+	def __init__(self,mqttClient):
+		super().__init__()
+		self.mqttClient=mqttClient
+
+	def run(self):
+		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.Speed.value)}/{str(CarInfo.carId)}", qos=1)
+		self.mqttClient.loop_forever()
+
+
+# this class represents the car running this code
+class Egocar:
 	def __init__(self):
-		self.speed = speedScale.scaleToRC(30)
+		# speed in Km/h
+		self.speed = speedScale.scaleToRC(-1)
 
 	def getSpeed(self):
 		return self.speed
+
+	def setSpeed(self,newSpeed):
+		self.speed = newSpeed
 		
 def main():
     threads = []
     ultrasonicManager = UltrasonicManager()
     pathManager = PathManager()
-    egoCar = car()
+    egoCar = Egocar()
 
-    #threads.append(DrivingScenario(ultrasonicManager))
+    mqtt = MQTTCommunication(egoCar)
+    global mqttClient
+    mqttClient = mqtt.getClient()
+    mqttRunner = MQTTRunner(mqttClient)
+
+    threads.append(DrivingScenario(ultrasonicManager,egoCar))
     threads.append(detectCollision(ultrasonicManager))
-    threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
+    #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
+    threads.append(mqttRunner)
 
 
     for thread in threads:
