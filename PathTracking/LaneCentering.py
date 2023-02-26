@@ -15,3 +15,5 @@ class LaneCentering(PathObserver):
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 self.TrackingModule.run(self.egoCar.getSpeed())
+            else:
+                self.egoCar.setSpeed(0)

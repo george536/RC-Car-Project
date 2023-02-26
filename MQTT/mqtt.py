@@ -7,7 +7,7 @@ from .topics import Topic
 
 class MQTTCommunication:
 
-    def __init__(self,car):
+    def __init__(self,car,ultrasonicManager):
         # using MQTT version 5 here, for 3.1.1: MQTTv311, 3.1: MQTTv31
         # userdata is user defined data of any type, updated by user_data_set()
         # client_id is the given name of the client
@@ -25,7 +25,9 @@ class MQTTCommunication:
         self.client.on_subscribe = self.on_subscribe
         self.client.on_message = self.on_message
         self.client.on_publish = self.on_publish
+
         self.car = car
+        self.ultrasonicManager = ultrasonicManager
 
     def getClient(self):
         return self.client
@@ -49,7 +51,10 @@ class MQTTCommunication:
         # Speed messages
         speed_pattern = f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}"
         if speed_pattern==msg.topic:
-            self.car.setSpeed(float(msg.payload.decode()))
+            if self.ultrasonicManager.getEmergencyStopState()==False:
+                self.car.setSpeed(float(msg.payload.decode()))
+            else:
+                self.car.setSpeed(0)
 
 
         #print("Message :"+msg.topic + " " + str(msg.qos) + " " + str(msg.payload.decode()))

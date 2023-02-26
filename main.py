@@ -87,19 +87,21 @@ class Egocar:
 		
 def main():
     threads = []
+	# MQTT passed in to send data back to server
     ultrasonicManager = UltrasonicManager()
     pathManager = PathManager()
     egoCar = Egocar()
 
-    mqtt = MQTTCommunication(egoCar)
+    mqtt = MQTTCommunication(egoCar,ultrasonicManager)
     global mqttClient
     mqttClient = mqtt.getClient()
-    mqttRunner = MQTTRunner(mqttClient)
+
+    ultrasonicManager.setMqttClient(mqttClient)
 
     threads.append(DrivingScenario(ultrasonicManager,egoCar))
     threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
-    threads.append(mqttRunner)
+    threads.append(MQTTRunner(mqttClient))
 
 
     for thread in threads:
