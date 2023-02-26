@@ -82,6 +82,7 @@ class Egocar:
 		return self.speed
 
 	def setSpeed(self,newSpeed):
+		print(f"changing speed to {newSpeed}")
 		self.speed = newSpeed
 		
 def main():
