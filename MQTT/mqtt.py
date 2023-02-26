@@ -2,7 +2,7 @@
 import time
 import paho.mqtt.client as paho
 from paho import mqtt
-import CarInfo.CarInfo 
+from .CarInfo import CarInfo 
 
 class MQTTCommunication:
 
