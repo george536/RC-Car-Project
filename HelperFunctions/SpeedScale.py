@@ -9,7 +9,7 @@ def scaleToRC(speed):
 
     scaledSpeed = speed*factor + ScalingParameters.min_RC_PWM
     
-    if scaledSpeed==ScalingParameters.min_RC_PWM:
+    if scaledSpeed<=ScalingParameters.min_RC_PWM:
         return 0
 
     return int(scaledSpeed)
