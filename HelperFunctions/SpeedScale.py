@@ -2,6 +2,9 @@ from .ScalingParameters import ScalingParameters
 
 def scaleToRC(speed):
 
+    if speed <1:
+        return 0
+
     if speed >ScalingParameters.max_car_speed:
         return ScalingParameters.max_RC_PWM
 
