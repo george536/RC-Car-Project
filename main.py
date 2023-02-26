@@ -68,7 +68,7 @@ class MQTTRunner(Thread):
 		self.mqttClient=mqttClient
 
 	def run(self):
-		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.Speed.value)}/{str(CarInfo.carId)}", qos=1)
+		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}", qos=1)
 		self.mqttClient.loop_forever()
 
 
