@@ -49,7 +49,7 @@ class MQTTCommunication:
         # Speed messages
         speed_pattern = f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}"
         if speed_pattern==msg.topic:
-            self.car.setSpeed(int(msg.payload.decode()))
+            self.car.setSpeed(float(msg.payload.decode()))
 
 
         #print("Message :"+msg.topic + " " + str(msg.qos) + " " + str(msg.payload.decode()))
