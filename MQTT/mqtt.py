@@ -48,7 +48,7 @@ class MQTTCommunication:
     def on_message(self,client, userdata, msg):
         # Speed messages
         speed_pattern = f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}"
-        if re.search(distance_pattern, msg.topic):
+        if speed_pattern==msg.topic:
             self.car.setSpeed(int(msg.payload.decode()))
 
 
