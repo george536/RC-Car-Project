@@ -1,4 +1,4 @@
-from ScalingParameters import ScalingParameters
+from .ScalingParameters import ScalingParameters
 
 def scaleToRC(speed):
 
