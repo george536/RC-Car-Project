@@ -14,10 +14,13 @@ class CollisionDetection(UltrasonicObserver):
 		if ultrasonic.get_distance() <=self.minimum:
 		    self.likelyhood += 1
 		    if self.likelyhood >=0:
-			    self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(Topic.EMERGENCYSTOP), qos=1)
+			    self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(1), qos=1)
 			    self.likelyhood = 0
 			    self.observerManager.emergencyStop = True
 			    PWM.setMotorModel(0,0,0,0)
 			    print("Emergency Stop")
 		else:
-		    self.observerManager.emergencyStop = False  
+			if self.observerManager.emergencyStop == True:
+				self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(0), qos=1)
+		    
+			self.observerManager.emergencyStop = False  

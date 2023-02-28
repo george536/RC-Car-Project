@@ -86,6 +86,9 @@ class Egocar:
 		self.speed = newSpeed
 		
 def main():
+    global MqttPeriod
+    MqttPeriod = 0.3 # seconds
+	
     threads = []
 	# MQTT passed in to send data back to server
     ultrasonicManager = UltrasonicManager()
