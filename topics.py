@@ -4,3 +4,4 @@ class Topic(enum.Enum):
     Main = 0
     SPEED = 1
     DISTANCE = 2
+    EMERGENCYSTOP = 3

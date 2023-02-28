@@ -49,7 +49,11 @@ class MQTTCommunication:
         # Distance messages
         distance_pattern = fr"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/$"
         if re.search(distance_pattern, msg.topic):
-            v.over_mqtt_distances[int(distance_pattern.split('/')[3])-1] = int(msg.payload.decode())
+            v.over_mqtt_distances[int(msg.topic.split('/')[3])-1] = int(msg.payload.decode())
+
+        emergency_stop_pattern = fr"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/$"
+        if re.search(emergency_stop_pattern, msg.topic):
+            v.over_mqtt_emergency_stops[int(msg.topic.split('/')[3])-1] = int(msg.payload.decode())
 
 
         #print("Message :"+msg.topic + " " + str(msg.qos) + " " + str(msg.payload.decode()))

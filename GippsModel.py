@@ -26,8 +26,9 @@ class GippsModel:
         return g
 
     def calc_free_travel(self, car):
-
-        inside_sqrt = (0.025 + car.v / car.vi)
+        try:
+            inside_sqrt = (0.025 + car.v / car.vi)
+        except: return 0
         if inside_sqrt<=0:
             #print("free travel error",inside_sqrt, car.v, car.vi)
             ######### added by George #########

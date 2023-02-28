@@ -20,3 +20,6 @@ class Vars:
 
     # stores the recent distance travelled by the cars as sent from each car through mqtt
     over_mqtt_distances = []
+
+    # stores the recent emergency stops made by cars and send over MQTT
+    over_mqtt_emergency_stops = []

@@ -11,6 +11,8 @@ import time
 from mqtt import MQTTCommunication
 from topics import Topic
 
+MqttPeriod = 0.3
+
 def insert_into_csv(data):
     if not os.path.exists("plot.csv"):
         with open("plot.csv", 'w', newline='') as file:
@@ -64,7 +66,7 @@ class ModelRunner(Thread):
 
         while True:
             # to be deleted
-            time.sleep(0.3)
+            time.sleep(MqttPeriod)
             # car id
             for car in self.cars:
 
@@ -75,13 +77,19 @@ class ModelRunner(Thread):
 
                 # updating car info and counter id
                 car.update()
+
+                # emergency stop
+                if Vars.over_mqtt_emergency_stops[car.idx-1] == 1:
+                    car.v = 0
+
                 global mqttClient
                 # send speed commands
                 mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(car.idx)}", payload=str(self.model.get_speed(car)), qos=1)
                 # store speeds to be graphed
                 Vars.speeds[car.idx-1] = self.model.get_speed(car)
                 # update distance recieved
-                car.loc = Vars.over_mqtt_distances[car.idx-1]
+                # TO BE ADDED AFTER CAR CODE SENDS IT
+                #car.loc = Vars.over_mqtt_distances[car.idx-1]
 
             current = datetime.now()
             if (current - self.lastCheckPoint).total_seconds() >= 0.5:
@@ -103,20 +111,24 @@ class MQTTRunner(Thread):
         for car in self.cars:
             # listen for distances
             self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(car.idx)}", qos=1)
+            self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(car.idx)}", qos=1)
+                                      
         self.mqttClient.loop_forever()
 
 def main():
 
     model = GippsModel()
-    car1 = Gipps_Vehicle(1, 1, model, None)
-    car2 = Gipps_Vehicle(2, 1, model, car1)
-    car3 = Gipps_Vehicle(3, 1, model, car2)
+    car1 = Gipps_Vehicle(1, 0, model, None)
+    car2 = Gipps_Vehicle(2, 0, model, car1)
+    car3 = Gipps_Vehicle(3, 0, model, car2)
 
     cars = [car1,car2,car3]
 
     Vars.speeds = [0,0,0]
 
     Vars.over_mqtt_distances = [0,0,0]
+
+    Vars.over_mqtt_emergency_stops = [0,0,0]
 
     threads = []
 
