@@ -17,5 +17,5 @@ class ObserverManager:
 			observer.update()
 
 	def setMqttClient(self,client):
-		self.mqttClient = mqttClient
+		self.mqttClient = client
 		
