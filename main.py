@@ -115,7 +115,7 @@ def main():
 
 
 # try: 
-    main()
+main()
 # except Exception as e:
 #     print(e)
 #     PWM.setMotorModel(0,0,0,0)
