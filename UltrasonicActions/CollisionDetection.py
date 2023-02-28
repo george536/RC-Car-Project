@@ -1,5 +1,5 @@
 from .UltrasonicObserver import *
-from ..MQTT.CarInfo import CarInfo
+from MQTT.CarInfo import CarInfo
 
 class CollisionDetection(UltrasonicObserver):
 	
