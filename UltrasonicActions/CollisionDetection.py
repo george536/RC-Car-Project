@@ -1,5 +1,6 @@
 from .UltrasonicObserver import *
 from MQTT.CarInfo import CarInfo
+from MQTT.topics import Topic
 
 class CollisionDetection(UltrasonicObserver):
 	
