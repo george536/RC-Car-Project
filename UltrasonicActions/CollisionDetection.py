@@ -14,7 +14,7 @@ class CollisionDetection(UltrasonicObserver):
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
 		    self.likelyhood += 1
-		    if self.likelyhood >=0:
+		    if self.likelyhood >=5:
 			    self.observerManager.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(1), qos=1)
 			    self.likelyhood = 0
 			    self.observerManager.emergencyStop = True
