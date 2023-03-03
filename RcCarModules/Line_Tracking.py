@@ -31,8 +31,8 @@ class Line_Tracking:
 
         boundry2 = int(boundry2)
 
-        boundry1 = 1500
-        boundry2 = 2500
+        boundry1 = 1000
+        boundry2 = 2000
 
         self.LMR=0x00
         if GPIO.input(self.IR01)==True:
