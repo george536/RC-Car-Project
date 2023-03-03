@@ -31,8 +31,8 @@ class Line_Tracking:
 
         boundry2 = int(boundry2)
 
-        boundry1 = 1000
-        boundry2 = 2000
+        boundry1 = 800
+        boundry2 = 1500
 
         self.LMR=0x00
         if GPIO.input(self.IR01)==True:
@@ -52,8 +52,8 @@ class Line_Tracking:
             PWM.setMotorModel(2000,2000,-4000,-4000)
         elif self.LMR==3:
             PWM.setMotorModel(-4000,-4000,2000,2000)
-        elif self.LMR==7:
-            PWM.setMotorModel(0,0,0,0)
+        #elif self.LMR==7:
+            #PWM.setMotorModel(0,0,0,0)
             # PWM.setMotorModel(0,0,0,0)
             # PWM.setMotorModel(0,0,0,0)
             # PWM.setMotorModel(0,0,0,0)
