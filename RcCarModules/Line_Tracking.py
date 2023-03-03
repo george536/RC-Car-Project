@@ -16,13 +16,13 @@ class Line_Tracking:
     
     def run(self,speed):
 
-        boundry1 = speed * 1.5
+        boundry1 = speed * 1.875
         if boundry1>4096:
             boundry1 = 4096
 
         boundry1 = int(boundry1)
 
-        boundry2 = speed * 2.5
+        boundry2 = speed * 3.125
         if boundry2>4096:
             boundry2 = 4096
 
