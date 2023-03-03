@@ -15,7 +15,7 @@ class Line_Tracking:
         
     
     def run(self,speed):
-        
+
         speed = int(speed)
 
         boundry1 = speed * 1.875

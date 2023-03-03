@@ -76,7 +76,7 @@ class MQTTRunner(Thread):
 class Egocar:
 	def __init__(self):
 		# speed in Km/h
-		self.speed = speedScale.scaleToRC(-1)
+		self.speed = 0
 
 	def getSpeed(self):
 		return self.speed
@@ -84,6 +84,9 @@ class Egocar:
 	def setSpeed(self,newSpeed):
 		print(f"changing speed to {newSpeed}")
 		self.speed = newSpeed
+
+	def getScaledSpeed(self):
+		return speedScale.scaleToRC(self.speed)
 		
 def main():
     global MqttPeriod
