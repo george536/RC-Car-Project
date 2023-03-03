@@ -22,6 +22,7 @@ class Line_Tracking:
         if boundry1>4096:
             boundry1 = 4096
 
+
         boundry1 = int(boundry1)
 
         boundry2 = speed * 3.125
@@ -29,6 +30,9 @@ class Line_Tracking:
             boundry2 = 4096
 
         boundry2 = int(boundry2)
+
+        boundry1 = 1500
+        boundry2 = 2500
 
         self.LMR=0x00
         if GPIO.input(self.IR01)==True:
