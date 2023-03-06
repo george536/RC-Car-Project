@@ -89,8 +89,6 @@ class Egocar:
 		return speedScale.scaleToRC(self.speed)
 		
 def main():
-    global MqttPeriod
-    MqttPeriod = 0.3 # seconds
 	
     threads = []
 	# MQTT passed in to send data back to server

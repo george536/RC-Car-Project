@@ -4,7 +4,7 @@ class ScalingParameters:
     # 120 km/hr is max
     max_car_speed = 120
 
-    max_RC_PWM = 2000
+    max_RC_PWM = 4096
 
     min_RC_PWM = 400
 

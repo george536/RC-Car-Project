@@ -31,6 +31,7 @@ class Line_Tracking:
 
         boundry2 = int(boundry2)
 
+        # to be removed
         boundry1 = 1000
         boundry2 = 1000
 
