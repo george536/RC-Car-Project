@@ -170,7 +170,7 @@ class App:
             carUIElements[i][0].grid(row=last+i, column=2)
 
             speed = tk.IntVar()
-            carUIElements[i].append(tk.Scale(master, from_=0, to=260, resolution=1, orient='horizontal', variable=speed, command = car_controls[i].update_intended_speed))
+            carUIElements[i].append(tk.Scale(master, from_=0, to=120, resolution=1, orient='horizontal', variable=speed, command = car_controls[i].update_intended_speed))
             carUIElements[i][1].grid(row=last+1+i, column=2)
             carUIElements[i][1].set(car_controls[i].intended_speed)
 

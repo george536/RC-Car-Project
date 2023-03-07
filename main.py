@@ -118,9 +118,9 @@ class MQTTRunner(Thread):
 def main():
 
     model = GippsModel()
-    car1 = Gipps_Vehicle(1, 0, model, None)
-    car2 = Gipps_Vehicle(2, 0, model, car1)
-    car3 = Gipps_Vehicle(3, 0, model, car2)
+    car1 = Gipps_Vehicle(1, 50, model, None)
+    car2 = Gipps_Vehicle(2, 50, model, car1)
+    car3 = Gipps_Vehicle(3, 50, model, car2)
 
     cars = [car1,car2,car3]
 
