@@ -4,7 +4,7 @@ import paho.mqtt.client as paho
 from paho import mqtt
 from .CarInfo import CarInfo 
 from .topics import Topic
-import HelperFunctions.CalculateDistance 
+from HelperFunctions.CalculateDistance import *
 
 class MQTTCommunication:
 
@@ -54,7 +54,7 @@ class MQTTCommunication:
         if speed_pattern==msg.topic:
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 self.car.setSpeed(float(msg.payload.decode()))
-                client.publish(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(CarInfo.carId)}", payload=str(CalculateDistance.calcDistance(self.car.getScaledSpeed(),0.3)), qos=1)
+                client.publish(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(CarInfo.carId)}", payload=str(calcDistance(self.car.getScaledSpeed(),0.3)), qos=1)
             else:
                 self.car.setSpeed(0)
                 client.publish(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(CarInfo.carId)}", payload=str(0), qos=1)
