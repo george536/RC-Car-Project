@@ -1,4 +1,4 @@
-import ScalingParameters.ScalingParameters
+from .ScalingParameters import ScalingParameters
 
 def calcDistance(pwm, interval):
 
