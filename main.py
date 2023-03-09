@@ -16,7 +16,7 @@ picam2.start()
 
 
 cv2.namedWindow('image')
-cv2.resizeWindow('image', 640, 480)
+cv2.resizeWindow('image', 640, 200)
 
 # # create trackbars for color change
 # cv2.createTrackbar('HMin','image',0,179,nothing) # Hue is from 0-179 for Opencv
