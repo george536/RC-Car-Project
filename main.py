@@ -62,7 +62,7 @@ if __name__ == '__main__':
         contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0,255,0), 3)
         
-        if len(contours==0):
+        if len(contours)==0:
             continue
         cnt = contours[0]
         M = cv2.moments(cnt)
