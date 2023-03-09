@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     while True:
         img = picam2.capture_array()
-        img = img[:240,320:]
+        img = img[240:,:]
 
         # # get current positions of all trackbars
         # hMin = cv2.getTrackbarPos('HMin', 'image')
