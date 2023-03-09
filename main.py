@@ -16,7 +16,6 @@ picam2.start()
 
 
 cv2.namedWindow('image')
-cv2.resizeWindow('image', 640, 5)
 
 # # create trackbars for color change
 # cv2.createTrackbar('HMin','image',0,179,nothing) # Hue is from 0-179 for Opencv
@@ -41,6 +40,7 @@ if __name__ == '__main__':
 
     while True:
         img = picam2.capture_array()
+        img = img[:240,320:]
 
         # # get current positions of all trackbars
         # hMin = cv2.getTrackbarPos('HMin', 'image')
