@@ -56,4 +56,5 @@ class Gipps_Vehicle(Vehicle):
         new_loc = self.loc + self.tn/2 * (self.v + new_v)
         self.a = new_a
         self.v = new_v
-        self.loc = new_loc
+        # modifed by George, location should be updated by car
+        #self.loc = new_loc

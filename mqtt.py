@@ -49,7 +49,8 @@ class MQTTCommunication:
         # Distance messages
         distance_pattern = fr"^{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/"
         if re.findall(distance_pattern, msg.topic):
-            v.over_mqtt_distances[int(msg.topic.split('/')[2])-1] = int(msg.payload.decode())
+            print(f"distance recieved for car {int(msg.topic.split('/')[2])} : {str(msg.payload.decode())}")
+            v.over_mqtt_distances[int(msg.topic.split('/')[2])-1] = float(msg.payload.decode())
 
         emergency_stop_pattern = fr"^{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/"
         

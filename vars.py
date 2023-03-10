@@ -5,8 +5,8 @@ class Vars:
     Zone_of_influence_downstream = 10 / 3
 
     # Vehicle Parameters
-    length = 5
-    miniGap = 4
+    length = 1
+    miniGap = 0.8
     initialMaxBraking = False
 
     # GIPPS Vehicle Parameters

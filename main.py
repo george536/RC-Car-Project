@@ -70,10 +70,10 @@ class ModelRunner(Thread):
             # car id
             for car in self.cars:
 
-                # saving to log
-                #f = open(self.log, "a")
-                #f.write(f"car {id} speed "+str(self.model.get_speed(car))+"\n")
-                #f.close()
+                # TO BE ADDED AFTER CAR CODE SENDS IT
+                car.loc += Vars.over_mqtt_distances[car.idx-1]
+                # reset
+                Vars.over_mqtt_distances[car.idx-1] = 0
 
                 # updating car info and counter id
                 car.update()
@@ -81,15 +81,19 @@ class ModelRunner(Thread):
                 # emergency stop
                 if Vars.over_mqtt_emergency_stops[car.idx-1] == 1:
                     car.v = 0
+                    car.loc=0
+                    car.loc = car.calc_loc()
 
                 global mqttClient
                 # send speed commands
                 mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(car.idx)}", payload=str(self.model.get_speed(car)), qos=1)
                 # store speeds to be graphed
                 Vars.speeds[car.idx-1] = self.model.get_speed(car)
+                
                 # update distance recieved
                 # TO BE ADDED AFTER CAR CODE SENDS IT
-                #car.loc = Vars.over_mqtt_distances[car.idx-1]
+                #car.loc += Vars.over_mqtt_distances[car.idx-1]
+                #Vars.over_mqtt_distances[car.idx-1] = 0
 
             current = datetime.now()
             if (current - self.lastCheckPoint).total_seconds() >= 0.5:
@@ -120,15 +124,14 @@ def main():
     model = GippsModel()
     car1 = Gipps_Vehicle(1, 50, model, None)
     car2 = Gipps_Vehicle(2, 50, model, car1)
-    car3 = Gipps_Vehicle(3, 50, model, car2)
 
-    cars = [car1,car2,car3]
+    cars = [car1,car2]
 
-    Vars.speeds = [0,0,0]
+    Vars.speeds = [0,0]
 
-    Vars.over_mqtt_distances = [0,0,0]
+    Vars.over_mqtt_distances = [0,0]
 
-    Vars.over_mqtt_emergency_stops = [0,0,0]
+    Vars.over_mqtt_emergency_stops = [0,0]
 
     threads = []
 
