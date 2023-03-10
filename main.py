@@ -100,8 +100,6 @@ def main():
     global mqttClient
     mqttClient = mqtt.getClient()
 
-    ultrasonicManager.setMqttClient(mqttClient)
-
     threads.append(DrivingScenario(ultrasonicManager,egoCar))
     threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))

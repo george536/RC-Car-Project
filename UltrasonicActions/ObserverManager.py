@@ -4,7 +4,6 @@ class ObserverManager:
 	def __init__(self):
 		self.observers = []
 		self.emergencyStop = False
-		self.mqttClient = None
 		
 	def getEmergencyStopState(self):
 		return self.emergencyStop
@@ -16,6 +15,4 @@ class ObserverManager:
 		for observer in self.observers:
 			observer.update()
 
-	def setMqttClient(self,client):
-		self.mqttClient = client
 		
