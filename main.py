@@ -81,7 +81,7 @@ if __name__ == '__main__':
             break
 
         middle = (img.shape[1]/2)
-        print((middle-cx)/middle)
+        print(((middle-cx)/middle)*100)
 
     video_cap.release()
     cv2.destroyAllWindows()
