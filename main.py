@@ -37,6 +37,9 @@ phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
         
+    prev_vals = []
+    prev = 0
+    counter = 0
 
     while True:
         img = picam2.capture_array()
@@ -83,7 +86,14 @@ if __name__ == '__main__':
             break
 
         middle = (img.shape[1]/2)
-        print(((middle-cx)/middle)*100)
+        off_value = -((middle-cx)/middle)*100
+        prev_vals.append(off_value)
+        if abs(off_value - prev)<30:
+            counter +=1 
+        prev = off_value
+        if counter>3:
+            print(sum(prev_vals)/len(prev_vals))
+            prev_vals = []
 
     video_cap.release()
     cv2.destroyAllWindows()
