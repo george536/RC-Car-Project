@@ -74,7 +74,7 @@ if __name__ == '__main__':
         cy = int(M['m01'] / moment_0)
 
         cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
-        cv2.circle(img, (int(240/2), 0), 1, (0, 0, 255), 3)
+        cv2.circle(img, (int(img.resolution[0]/2), 0), 1, (0, 0, 255), 3)
 
         cv2.imshow('image', img)
         # Wait longer to prevent freeze for videos.
