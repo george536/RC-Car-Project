@@ -43,17 +43,19 @@ if __name__ == '__main__':
         img = img[240:,:]
 
         # # get current positions of all trackbars
-        # hMin = cv2.getTrackbarPos('HMin', 'image')
-        # sMin = cv2.getTrackbarPos('SMin', 'image')
-        # vMin = cv2.getTrackbarPos('VMin', 'image')
+        hMin = cv2.getTrackbarPos('HMin', 'image')
+        sMin = cv2.getTrackbarPos('SMin', 'image')
+        vMin = cv2.getTrackbarPos('VMin', 'image')
 
-        # hMax = cv2.getTrackbarPos('HMax', 'image')
-        # sMax = cv2.getTrackbarPos('SMax', 'image')
-        # vMax = cv2.getTrackbarPos('VMax', 'image')
+        hMax = cv2.getTrackbarPos('HMax', 'image')
+        sMax = cv2.getTrackbarPos('SMax', 'image')
+        vMax = cv2.getTrackbarPos('VMax', 'image')
 
         # Set minimum and max HSV values to display
-        lower = np.array([30, 44, 202])
-        upper = np.array([57, 171, 255])
+        #lower = np.array([30, 44, 202])
+        #upper = np.array([57, 171, 255])
+        lower = np.array([hMin, sMin, vMin])
+        upper = np.array([hMax, sMax, vMax])
 
         # Create HSV Image and threshold into a range.
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
