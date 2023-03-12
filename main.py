@@ -81,6 +81,8 @@ if __name__ == '__main__':
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
+        print(int(img.shape[1]/2)-cx)
+
     video_cap.release()
     cv2.destroyAllWindows()
 
