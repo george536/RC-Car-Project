@@ -3,9 +3,6 @@ import numpy as np
 import json
 from picamera2 import Picamera2
 
-def nothing(x):
-    pass
-
 picam2 = Picamera2()
 picam2.start()
 
