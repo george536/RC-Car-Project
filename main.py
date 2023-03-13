@@ -13,6 +13,8 @@ from RcCarModules.Motor import *
 from MQTT.mqtt import MQTTCommunication
 from MQTT.topics import Topic
 from MQTT.CarInfo import CarInfo
+from CameraLaneDetection.CameraLaneDetection import CameraLaneDetection
+from CameraLaneDetection.CamLaneTracking import CamLaneTracking
 
 # driving scenario thread
 class DrivingScenario(Thread):
@@ -26,6 +28,7 @@ class DrivingScenario(Thread):
             while True:
             	self.ctrl.DriveForward(speedScale.scaleToRC(self.egoCar.getSpeed()))
 		
+# Collision detection thread
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
 		super().__init__()
@@ -39,7 +42,7 @@ class detectCollision(Thread):
 		while True:
 			self.observerManager.notifyAllObservers()
 
-
+# Tracking path thread
 class TrackingPath(Thread):
 	def __init__(self,observerManager,ultrasonicManager,egoCar):
 		super().__init__()
@@ -51,17 +54,7 @@ class TrackingPath(Thread):
 		while True:
 			self.observerManager.notifyAllObservers()
 
-class TrackingPath(Thread):
-	def __init__(self,observerManager,ultrasonicManager,egoCar):
-		super().__init__()
-
-		self.observerManager = observerManager
-		LaneCentering(self.observerManager,ultrasonicManager,egoCar)
-
-	def run(self):
-		while True:
-			self.observerManager.notifyAllObservers()
-
+# thread to listen for mqtt messages
 class MQTTRunner(Thread):
 	def __init__(self,mqttClient):
 		super().__init__()
@@ -70,6 +63,15 @@ class MQTTRunner(Thread):
 	def run(self):
 		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}", qos=1)
 		self.mqttClient.loop_forever()
+
+class CameraDetection(Thread):
+	def __init__(self,ultrasonicManager,egoCar):
+		super().__init__()
+		self.CamLaneTracking = CamLaneTracking(ultrasonicManager,egoCar)
+
+	def run(self):
+		while True:
+			self.CamLaneTracking.update()
 
 
 # this class represents the car running this code
@@ -104,6 +106,8 @@ def main():
     threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
     threads.append(MQTTRunner(mqttClient))
+    threads.append(CameraLaneDetection())
+    threads.append(CameraDetection(ultrasonicManager,egoCar))
 
 
     for thread in threads:
