@@ -11,7 +11,9 @@ class CamLaneTracking:
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
+                print(DetectionData.location)
                 if abs(DetectionData.location)<self.safeZone:
-                    PWM.setMotorModel(-speed,-speed,-speed,-speed)
+                    pass
+                    #PWM.setMotorModel(-speed,-speed,-speed,-speed)
             else:
                 self.egoCar.setSpeed(0)
