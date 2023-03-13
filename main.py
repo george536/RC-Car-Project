@@ -51,16 +51,6 @@ class TrackingPath(Thread):
 		while True:
 			self.observerManager.notifyAllObservers()
 
-class TrackingPath(Thread):
-	def __init__(self,observerManager,ultrasonicManager,egoCar):
-		super().__init__()
-
-		self.observerManager = observerManager
-		LaneCentering(self.observerManager,ultrasonicManager,egoCar)
-
-	def run(self):
-		while True:
-			self.observerManager.notifyAllObservers()
 
 class MQTTRunner(Thread):
 	def __init__(self,mqttClient):
