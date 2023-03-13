@@ -80,3 +80,7 @@ class CameraLaneDetection(Thread):
 
         video_cap.release()
         cv2.destroyAllWindows()
+
+cameraLaneDetection = CameraLaneDetection()
+cameraLaneDetection.start()
+cameraLaneDetection.join()
