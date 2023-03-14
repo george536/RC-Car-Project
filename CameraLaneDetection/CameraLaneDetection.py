@@ -86,7 +86,7 @@ class CameraLaneDetection(Thread):
 
             if counter>3:
                 avg_pos = sum(prev_vals)/len(prev_vals)
-                print("position off by: "+str(avg_pos))
+                #print("position off by: "+str(avg_pos))
                 DetectionData.location = avg_pos
                 prev_vals = []
 
