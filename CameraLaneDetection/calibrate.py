@@ -23,7 +23,7 @@ cv2.setTrackbarPos('HMax', 'image', 179)
 cv2.setTrackbarPos('SMax', 'image', 255)
 cv2.setTrackbarPos('VMax', 'image', 255)
 
-with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
+with open('cameraParameters.json', 'r') as file:
     data = json.load(file)
 
 # Initialize to check if HSV min/max value changes
