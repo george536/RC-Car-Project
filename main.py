@@ -27,7 +27,7 @@ class DrivingScenario(Thread):
 	def run(self):
             while True:
             	self.ctrl.DriveForward(speedScale.scaleToRC(self.egoCar.getSpeed()))
-		
+
 # Collision detection thread
 class detectCollision(Thread):
 	def __init__(self,ultrasonicManager):
@@ -78,7 +78,7 @@ class CameraDetection(Thread):
 class Egocar:
 	def __init__(self):
 		# speed in Km/h
-		self.speed = 0
+		self.speed = 30
 
 	def getSpeed(self):
 		return self.speed
@@ -102,10 +102,10 @@ def main():
     global mqttClient
     mqttClient = mqtt.getClient()
 
-    threads.append(DrivingScenario(ultrasonicManager,egoCar))
+    #threads.append(DrivingScenario(ultrasonicManager,egoCar))
     threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
-    threads.append(MQTTRunner(mqttClient))
+    #threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
 
