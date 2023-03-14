@@ -77,18 +77,18 @@ class CameraLaneDetection(Thread):
             middle = (img.shape[1]/2)
             off_value = -((middle-cx)/middle)*100
 
-            prev_vals.append(off_value)
+            #prev_vals.append(off_value)
 
-            if abs(off_value - prev)<30:
-                counter +=1 
+            #if abs(off_value - prev)<30:
+            #    counter +=1 
 
-            prev = off_value
+            #prev = off_value
 
-            if counter>0:
-                avg_pos = sum(prev_vals)/len(prev_vals)
+            #if counter>0:
+            #    avg_pos = sum(prev_vals)/len(prev_vals)
                 #print("position off by: "+str(avg_pos))
-                DetectionData.location = avg_pos
-                prev_vals = []
+            DetectionData.location = off_value
+            #    prev_vals = []
 
         video_cap.release()
         cv2.destroyAllWindows()
