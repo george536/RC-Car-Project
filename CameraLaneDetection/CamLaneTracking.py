@@ -25,7 +25,7 @@ class CamLaneTracking:
 
             current_speed = self.egoCar.getScaledSpeed()
 
-            target_speed = current_speed + (1 - abs(self.error)) * current_speed
+            target_speed = 50 + (1 - abs(self.error)) * 50
 
             feedback = current_speed - target_speed
 
