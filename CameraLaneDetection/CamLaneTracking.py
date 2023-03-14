@@ -11,7 +11,7 @@ class CamLaneTracking:
         # PID values
         self.kp =17
         self.ki = 0
-        self.kd = 0
+        self.kd = 1
 
         self.error = 0
         self.integral = 0
@@ -50,6 +50,6 @@ class CamLaneTracking:
                 pass
                 #self.egoCar.setSpeed(0)
 
-            time.sleep(0.05)
+            time.sleep(0.01)
 
             self.last_time = time.time()
