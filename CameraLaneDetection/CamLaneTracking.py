@@ -50,6 +50,6 @@ class CamLaneTracking:
                 pass
                 #self.egoCar.setSpeed(0)
 
-            time.sleep(0.01)
+            #time.sleep(0.01)
 
             self.last_time = time.time()
