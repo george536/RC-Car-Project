@@ -12,7 +12,7 @@ from .DetectionData import DetectionData
 picam2 = Picamera2()
 picam2.start()
 
-cv2.namedWindow('image')
+#cv2.namedWindow('image')
 
 
 class CameraLaneDetection(Thread):
