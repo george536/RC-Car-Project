@@ -49,6 +49,7 @@ class CamLaneTracking:
                 else:
                     PWM.setMotorModel(-speed+self.error,-speed+self.error,-speed,-speed)
             else:
-                self.egoCar.setSpeed(0)
+                pass
+                #self.egoCar.setSpeed(0)
 
             time.sleep(0.01)
