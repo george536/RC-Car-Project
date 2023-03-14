@@ -49,7 +49,16 @@ class CameraLaneDetection(Thread):
             
             if len(contours)==0:
                 continue
-            cnt = contours[0]
+
+            largest_contour = None
+            largest_area = 0
+            for contour in contours:
+                area = cv2.contourArea(contour)
+                if area > largest_area:
+                    largest_area = area
+                    largest_contour = contour
+
+            cnt = largest_contour
             M = cv2.moments(cnt)
             moment_0 = M['m00']
             
