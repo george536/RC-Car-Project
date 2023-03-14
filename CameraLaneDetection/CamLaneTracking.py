@@ -37,9 +37,9 @@ class CamLaneTracking:
 
             self.previous_error = self.error
 
-            print("Error by PId: "+str(self.error))
+            print("Error by PId: "+str(output))
 
-            self.error = int(self.error)
+            output = int(output)
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
@@ -47,9 +47,9 @@ class CamLaneTracking:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
                 if self.error > 0:
-                    PWM.setMotorModel(-speed,-speed,-speed+self.error,-speed+self.error)
+                    PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                 else:
-                    PWM.setMotorModel(-speed-self.error,-speed-self.error,-speed,-speed)
+                    PWM.setMotorModel(-speed-output,-speed-output,-speed,-speed)
             else:
                 pass
                 #self.egoCar.setSpeed(0)
