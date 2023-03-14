@@ -45,7 +45,7 @@ class CamLaneTracking:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
                 # speed reduction on curves
-                if self.error >35 and self.egoCar.getSpeed()>70:
+                if self.error >40 and self.egoCar.getSpeed()>70:
                     speed = int(speed * 0.8)
                 if self.error > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
