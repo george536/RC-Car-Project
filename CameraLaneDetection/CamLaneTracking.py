@@ -9,9 +9,9 @@ class CamLaneTracking:
         self.safeZone = 10
 
         # PID values
-        self.kp =17
+        self.kp =18.5
         self.ki = 0
-        self.kd = 0.01
+        self.kd = 0
 
         self.error = 0
         self.integral = 0
