@@ -33,7 +33,7 @@ class CamLaneTracking:
             self.integral += self.error * dt
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
-            output = proportional + (self.integral * ki) + derivative
+            output = proportional + (self.integral * self.ki) + derivative
 
             self.previous_error = self.error
 
