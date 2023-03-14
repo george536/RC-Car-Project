@@ -9,7 +9,7 @@ class CamLaneTracking:
         self.safeZone = 10
 
         # PID values
-        self.kp =19
+        self.kp =20
         self.ki = 0
         self.kd = 0
 
@@ -45,7 +45,7 @@ class CamLaneTracking:
                 #if abs(DetectionData.location)<self.safeZone:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
-                if self.counter<5:
+                if self.counter<1:
                     self.counter+=1
                     self.outputs.append(output)
                 else:
