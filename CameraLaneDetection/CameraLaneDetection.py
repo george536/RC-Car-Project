@@ -10,8 +10,7 @@ from threading import Thread
 from .DetectionData import DetectionData
 
 picam2 = Picamera2()
-picam2.start_preview(Preview.NULL)
-#picam2.start()
+picam2.start()
 
 cv2.namedWindow('image')
 
