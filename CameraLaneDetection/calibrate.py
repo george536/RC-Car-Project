@@ -18,6 +18,9 @@ cv2.createTrackbar('HMax','image',0,179,nothing)
 cv2.createTrackbar('SMax','image',0,255,nothing)
 cv2.createTrackbar('VMax','image',0,255,nothing)
 
+with open('cameraParameters.json', 'r') as file:
+    data = json.load(file)
+
 # Set default value trackbars.
 cv2.setTrackbarPos('HMin', 'image', data['hMin'])
 cv2.setTrackbarPos('SMin', 'image', data['sMin'])
@@ -26,8 +29,6 @@ cv2.setTrackbarPos('HMax', 'image', data['hMax'])
 cv2.setTrackbarPos('SMax', 'image', data['sMax'])
 cv2.setTrackbarPos('VMax', 'image', data['vMax'])
 
-with open('cameraParameters.json', 'r') as file:
-    data = json.load(file)
 
 # Initialize to check if HSV min/max value changes
 hMin ,sMin , vMin = data['hMin'], data['sMin'], data['vMin']
