@@ -2,6 +2,8 @@
 import cv2
 import numpy as np
 import json
+# install this first
+# sudo apt-get install build-essential libcap-dev
 from picamera2 import Picamera2
 from threading import Thread
 from .DetectionData import DetectionData

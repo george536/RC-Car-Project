@@ -7,6 +7,10 @@ name = "pypi"
 smbus = "*"
 "rpi.gpio" = "*"
 paho-mqtt = "*"
+"paho.mqtt" = "*"
+opencv-python = "*"
+picamera = "*"
+picamera2 = "*"
 
 [dev-packages]
 
