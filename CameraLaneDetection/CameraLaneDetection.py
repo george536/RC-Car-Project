@@ -22,7 +22,7 @@ class CameraLaneDetection(Thread):
 
     def run(self):
 
-        with open('.cameraParameters.json', 'r') as file:
+        with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
             data = json.load(file)
     
         prev_vals = []
