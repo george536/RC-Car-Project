@@ -49,10 +49,10 @@ class CamLaneTracking:
                     self.counter+=1
                     self.outputs.append(output)
                 else:
-                    output = sum(self.outputs)/len(self.outputs)
+                    output = int(sum(self.outputs)/len(self.outputs))
                     self.counter = 0
                     self.outputs = []
-                    
+
                     if self.error > 0:
                         PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                     else:
