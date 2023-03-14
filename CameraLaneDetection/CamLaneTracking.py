@@ -6,7 +6,7 @@ class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
         self.ultrasonicManager = ultrasonicManager
         self.egoCar = egoCar
-        self.safeZone = 10
+        self.safeZone = 30
 
         # PID values
         # good was 17
