@@ -37,6 +37,8 @@ class CamLaneTracking:
 
             print("Error by PId: "+str(self.error))
 
+            self.error = int(self.error)
+
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
                 #if abs(DetectionData.location)<self.safeZone:
