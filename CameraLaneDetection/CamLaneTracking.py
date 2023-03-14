@@ -18,8 +18,7 @@ class CamLaneTracking:
 		
     def update(self):
 
-            position = DetectionData.location
-            self.error = position -0.5
+            self.error = DetectionData.location
 
             current_speed = self.egoCar.getScaledSpeed()
 
