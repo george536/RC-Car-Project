@@ -44,8 +44,8 @@ class CamLaneTracking:
                 #if abs(DetectionData.location)<self.safeZone:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
-
-                if self.error >30:
+                # speed reduction on curves
+                if self.error >35:
                     speed = int(speed * 0.8)
                 if self.error > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
