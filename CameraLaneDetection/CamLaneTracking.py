@@ -21,10 +21,10 @@ class CamLaneTracking:
             self.error = DetectionData.location
 
             proportional =  self.kp * self.error
-            integral += self.ki * self.error
+            self.integral += self.ki * self.error
             derivative =  self.kd * ( self.error -  self.previous_error)
 
-            output = proportional + integral + derivative
+            output = proportional + self.integral + derivative
 
             self.previous_error = self.error
 
