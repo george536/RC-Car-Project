@@ -9,9 +9,9 @@ class CamLaneTracking:
         self.safeZone = 10
 
         # PID values
-        self.kp = 100
+        self.kp = 20
         self.ki = 5
-        self.kd = 20
+        self.kd = 0.5
 
         self.error = 0
         self.integral = 0
@@ -30,14 +30,14 @@ class CamLaneTracking:
             dt = t-self.last_time
 
             proportional =  self.kp * self.error
-            self.integral += self.error * dt
+            self.integral += min(4096, self.integral + self.error * dt)
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
             output = proportional + (self.integral * self.ki) + derivative
 
             self.previous_error = self.error
 
-            print("Error by PId: "+str(output))
+            print("Output by PId: "+str(output))
 
             output = int(output)
 
