@@ -45,7 +45,7 @@ class CamLaneTracking:
                 #if abs(DetectionData.location)<self.safeZone:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
-                if self.counter<1:
+                if self.counter<3:
                     self.counter+=1
                     self.outputs.append(output)
                 else:
