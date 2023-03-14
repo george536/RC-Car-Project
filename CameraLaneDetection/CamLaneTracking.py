@@ -35,10 +35,8 @@ class CamLaneTracking:
 
             print("Output by PId: "+str(output))
 
-            try:
-                output = int(output)
-            except:
-                output = 0
+
+            output = int(output)
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
