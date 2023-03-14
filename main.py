@@ -78,7 +78,7 @@ class CameraDetection(Thread):
 class Egocar:
 	def __init__(self):
 		# speed in Km/h
-		self.speed = 50
+		self.speed = 20
 
 	def getSpeed(self):
 		return self.speed
