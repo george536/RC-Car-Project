@@ -16,10 +16,6 @@ class CamLaneTracking:
         self.error = 0
         self.integral = 0
         self.previous_error = 0
-
-        self.rightVal = 0
-        self.leftVal = 0
-
         self.last_time = time.time()
 		
     def update(self):
