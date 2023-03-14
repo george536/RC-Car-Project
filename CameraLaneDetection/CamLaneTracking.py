@@ -1,5 +1,6 @@
 from .DetectionData import DetectionData
 from RcCarModules.Motor import *
+import time
 
 class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
@@ -18,28 +19,27 @@ class CamLaneTracking:
 
         self.rightVal = 0
         self.leftVal = 0
+
+        self.last_time = time.time()
 		
     def update(self):
 
             self.error = DetectionData.location
 
-            current_speed = self.egoCar.getScaledSpeed()
-
-            target_speed = 50 + (1 - abs(self.error)) * 50
-
-            feedback = current_speed - target_speed
+            t = time.time()
+            dt = t-self.last_time
 
             proportional =  self.kp * self.error
-            self.integral += self.ki * (self.error + feedback)
-            derivative =  self.kd * ( self.error -  self.previous_error)
+            self.integral += self.error * dt
+            derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
-            output = proportional + self.integral + derivative
+            output = proportional + (self.integral * ki) + derivative
 
             self.previous_error = self.error
 
             print("Error by PId: "+str(self.error))
 
-            self.error = int(self.error/2)
+            self.error = int(self.error)
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
@@ -47,15 +47,13 @@ class CamLaneTracking:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
                 if self.error > 0:
-                    self.leftVal=0
-                    self.rightVal += self.error
-                    PWM.setMotorModel(-speed,-speed,-speed+self.rightVal,-speed+self.rightVal)
+                    PWM.setMotorModel(-speed,-speed,-speed+self.error,-speed+self.error)
                 else:
-                    self.rightVal=0
-                    self.leftVal += self.error
-                    PWM.setMotorModel(-speed-self.leftVal,-speed-self.leftVal,-speed,-speed)
+                    PWM.setMotorModel(-speed-self.error,-speed-self.error,-speed,-speed)
             else:
                 pass
                 #self.egoCar.setSpeed(0)
 
             time.sleep(0.01)
+
+            self.last_time = time.time()
