@@ -18,10 +18,13 @@ cv2.createTrackbar('HMax','image',0,179,nothing)
 cv2.createTrackbar('SMax','image',0,255,nothing)
 cv2.createTrackbar('VMax','image',0,255,nothing)
 
-# Set default value for MAX HSV trackbars.
-cv2.setTrackbarPos('HMax', 'image', 179)
-cv2.setTrackbarPos('SMax', 'image', 255)
-cv2.setTrackbarPos('VMax', 'image', 255)
+# Set default value trackbars.
+cv2.setTrackbarPos('HMin', 'image', data['hMin'])
+cv2.setTrackbarPos('SMin', 'image', data['sMin'])
+cv2.setTrackbarPos('VMin', 'image', data['vMin'])
+cv2.setTrackbarPos('HMax', 'image', data['hMax'])
+cv2.setTrackbarPos('SMax', 'image', data['sMax'])
+cv2.setTrackbarPos('VMax', 'image', data['vMax'])
 
 with open('cameraParameters.json', 'r') as file:
     data = json.load(file)
