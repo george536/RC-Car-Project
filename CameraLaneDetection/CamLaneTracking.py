@@ -8,10 +8,9 @@ class CamLaneTracking:
         self.safeZone = 10
 		
     def update(self):
-
+            print("from centering manager "+str(DetectionData.location))
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
-                print(DetectionData.location)
                 if abs(DetectionData.location)<self.safeZone:
                     pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
