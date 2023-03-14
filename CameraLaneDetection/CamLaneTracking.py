@@ -18,9 +18,6 @@ class CamLaneTracking:
         self.previous_error = 0
         self.last_time = time.time()
 
-        self.counter = 0
-        self.outputs = []
-		
     def update(self):
 
             self.error = DetectionData.location
@@ -45,18 +42,11 @@ class CamLaneTracking:
                 #if abs(DetectionData.location)<self.safeZone:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
-                if self.counter<3:
-                    self.counter+=1
-                    self.outputs.append(output)
-                else:
-                    output = int(sum(self.outputs)/len(self.outputs))
-                    self.counter = 0
-                    self.outputs = []
 
-                    if self.error > 0:
-                        PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
-                    else:
-                        PWM.setMotorModel(-speed-output,-speed-output,-speed,-speed)
+                if self.error > 0:
+                    PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
+                else:
+                    PWM.setMotorModel(-speed-output,-speed-output,-speed,-speed)
             else:
                 pass
                 #self.egoCar.setSpeed(0)
