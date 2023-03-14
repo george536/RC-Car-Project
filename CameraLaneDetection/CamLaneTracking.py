@@ -45,8 +45,8 @@ class CamLaneTracking:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
 
-                if self.error >40:
-                    speed = speed * 0.7
+                if self.error >30:
+                    speed = int(speed * 0.7)
                 if self.error > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                 else:
