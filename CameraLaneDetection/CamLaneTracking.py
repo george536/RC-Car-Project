@@ -1,5 +1,5 @@
 from .DetectionData import DetectionData
-from .RcCarModules.Motor import *
+from RcCarModules.Motor import *
 
 class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
