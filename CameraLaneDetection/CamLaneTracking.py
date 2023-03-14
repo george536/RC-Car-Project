@@ -15,6 +15,9 @@ class CamLaneTracking:
         self.error = 0
         self.integral = 0
         self.previous_error = 0
+
+        self.rightVal = 0
+        self.leftVal = 0
 		
     def update(self):
 
@@ -36,7 +39,7 @@ class CamLaneTracking:
 
             print("Error by PId: "+str(self.error))
 
-            self.error = int(self.error * 3)
+            self.error = int(self.error)
 
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 speed = self.egoCar.getScaledSpeed()
@@ -44,9 +47,11 @@ class CamLaneTracking:
                 #    pass
                     #PWM.setMotorModel(-speed,-speed,-speed,-speed)
                 if self.error > 0:
-                    PWM.setMotorModel(-speed,-speed,-speed+self.error,-speed+self.error)
+                    self.rightVal += self.error
+                    PWM.setMotorModel(-speed,-speed,-speed+self.rightVal,-speed+self.rightVal)
                 else:
-                    PWM.setMotorModel(-speed-self.error,-speed-self.error,-speed,-speed)
+                    self.leftVal += self.error
+                    PWM.setMotorModel(-speed-self.leftVal,-speed-self.leftVal,-speed,-speed)
             else:
                 pass
                 #self.egoCar.setSpeed(0)
