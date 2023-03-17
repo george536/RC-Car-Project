@@ -44,6 +44,7 @@ class CamLaneTracking:
             #print("Output by PId: "+str(output))
 
             if math.isnan(output):
+                return
                 print("Output is NAN")
                 output = 0
 
