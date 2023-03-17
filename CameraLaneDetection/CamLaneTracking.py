@@ -24,9 +24,6 @@ class CamLaneTracking:
 
             self.error = DetectionData.location
 
-            if math.isnan(self.error):
-                print("Error is NAN")
-
             t = time.time()
             dt = t-self.last_time
 
@@ -34,17 +31,17 @@ class CamLaneTracking:
             self.integral += min(4096, self.integral + self.error * dt)
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
-            if math.isnan(derivative):
-                derivative = 0
-
             output = proportional + (self.integral * self.ki) + derivative
+
+            print("Error: "+str(self.error))
+            print("P: "+str(proportional))
+            print("I: "+str(self.integral * self.ki))
+            print("D: "+str(derivative))
+            print("output: "+str(output))
 
             self.previous_error = self.error
 
             #print("Output by PId: "+str(output))
-
-            if math.isnan(proportional):
-                print("proportional is NAN")
 
             if math.isnan(output):
                 #return
