@@ -47,8 +47,8 @@ class CamLaneTracking:
                 print("proportional is NAN")
 
             if math.isnan(output):
-                return
-                print("Output is NAN")
+                #return
+                #print("Output is NAN")
                 output = 0
 
 
