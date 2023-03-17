@@ -1,6 +1,7 @@
 from .DetectionData import DetectionData
 from RcCarModules.Motor import *
 import time
+import math
 
 class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
@@ -30,11 +31,14 @@ class CamLaneTracking:
             self.integral += min(4096, self.integral + self.error * dt)
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
+            if math.isnan(derivative):
+                derivative = 0
+
             output = proportional + (self.integral * self.ki) + derivative
 
             self.previous_error = self.error
 
-            print("Output by PId: "+str(output))
+            #print("Output by PId: "+str(output))
 
 
             output = int(output)
