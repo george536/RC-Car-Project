@@ -48,7 +48,7 @@ class CamLaneTracking:
 
             if math.isnan(output):
                 #return
-                #print("Output is NAN")
+                print("Output is NAN")
                 output = 0
 
 
