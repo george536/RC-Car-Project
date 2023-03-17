@@ -9,8 +9,8 @@ class CamLaneTracking:
         self.safeZone = 30
 
         # PID values
-        # good was 17
-        self.kp =20
+        # good was 20
+        self.kp =21
         self.ki = 0
         self.kd = 0.001
 
@@ -39,11 +39,11 @@ class CamLaneTracking:
 
             output = int(output)
 
-            if self.ultrasonicManager.getEmergencyStopState()==False:
+            if self.ultrasonicManager.getEmergencyStopState()==False :
                 speed = self.egoCar.getScaledSpeed()
-                #if abs(DetectionData.location)<self.safeZone:
-                #    pass
-                    #PWM.setMotorModel(-speed,-speed,-speed,-speed)
+                speed_in_km = self.egoCar.getSpeed()
+                if speed_in_km ==0:
+                    return
                 # speed reduction on curves
                 if self.error >40 and self.egoCar.getSpeed()>70:
                     speed = int(speed * 0.8)
