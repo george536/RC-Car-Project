@@ -44,7 +44,8 @@ class CamLaneTracking:
             if self.ultrasonicManager.getEmergencyStopState()==False :
                 speed = self.egoCar.getScaledSpeed()
                 speed_in_km = self.egoCar.getSpeed()
-      
+                if int(speed_in_km) ==0:
+                    return
 
                 if speed_in_km > 40:
                     self.kp = 18
