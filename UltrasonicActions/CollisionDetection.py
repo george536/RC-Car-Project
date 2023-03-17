@@ -18,7 +18,7 @@ class CollisionDetection(UltrasonicObserver):
 			    self.likelyhood = 0
 			    self.observerManager.emergencyStop = True
 			    PWM.setMotorModel(0,0,0,0)
-			    print("Emergency Stop")
+			    print("Emergency Stop "+str(ultrasonic.get_distance()))
 		else:
 			if self.observerManager.emergencyStop == True:
 			    self.observerManager.emergencyStop = False  
