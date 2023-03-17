@@ -31,22 +31,13 @@ class CamLaneTracking:
             self.integral += min(4096, self.integral + self.error * dt)
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
-            output = proportional + (self.integral * self.ki) + derivative
+            #  (self.integral * self.ki) causing NaN
 
-            print("Error: "+str(self.error))
-            print("P: "+str(proportional))
-            print("I: "+str(self.integral * self.ki))
-            print("D: "+str(derivative))
-            print("output: "+str(output))
+            output = proportional + derivative
 
             self.previous_error = self.error
 
             #print("Output by PId: "+str(output))
-
-            if math.isnan(output):
-                #return
-                print("Output is NAN")
-                output = 0
 
 
             output = int(output)
