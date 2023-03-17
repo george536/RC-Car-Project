@@ -7,7 +7,6 @@ class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
         self.ultrasonicManager = ultrasonicManager
         self.egoCar = egoCar
-        self.safeZone = 30
 
         # PID values
         # good was 20
@@ -47,6 +46,12 @@ class CamLaneTracking:
                 speed_in_km = self.egoCar.getSpeed()
                 if speed_in_km ==0:
                     return
+
+                if speed_in_km > 40:
+                    self.kp = 25
+                else:
+                    self.kp = 22
+                    
                 # speed reduction on curves
                 if self.error >40 and self.egoCar.getSpeed()>70:
                     speed = int(speed * 0.8)
