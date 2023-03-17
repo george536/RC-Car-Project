@@ -24,6 +24,9 @@ class CamLaneTracking:
 
             self.error = DetectionData.location
 
+            if math.isnan(self.error):
+                print("Error is NAN")
+
             t = time.time()
             dt = t-self.last_time
 
@@ -39,6 +42,10 @@ class CamLaneTracking:
             self.previous_error = self.error
 
             #print("Output by PId: "+str(output))
+
+            if math.isnan(output):
+                print("Output is NAN")
+                output = 0
 
 
             output = int(output)
