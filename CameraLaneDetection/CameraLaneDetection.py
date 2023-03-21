@@ -75,7 +75,8 @@ class CameraLaneDetection(Thread):
                 break
 
             middle = (img.shape[1]/2)
-            off_value = -((middle-cx)/middle)*100
+            off_value = -(middle-cx)
+            #off_value = -((middle-cx)/middle)*100
 
             #prev_vals.append(off_value)
 
