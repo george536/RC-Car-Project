@@ -9,12 +9,12 @@ class CollisionDetection(UltrasonicObserver):
 		self.observerManager = observerManager
 		observerManager.attach(self)
 		self.likelyhood = 0
-		self.minimum = 10 # default minimum distance in cm
+		self.minimum = 15 # default minimum distance in cm
 		
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
 		    self.likelyhood += 1
-		    if self.likelyhood >=5:
+		    if self.likelyhood >=3:
 			    self.likelyhood = 0
 			    self.observerManager.emergencyStop = True
 			    PWM.setMotorModel(0,0,0,0)

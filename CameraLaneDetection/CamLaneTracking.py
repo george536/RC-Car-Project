@@ -31,32 +31,27 @@ class CamLaneTracking:
             dt = t-self.last_time
 
             proportional =  self.kp * self.error
-            self.integral += min(4096, self.integral + self.error * dt)
+            self.integral += min(4096-400, self.integral + self.error * dt)
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
             #  (self.integral * self.ki) causing NaN
             integral = (self.integral * self.ki)
-            if integral > 400:
-                integral = 400
 
-            output = proportional + derivative
+            output = proportional + integral + derivative
 
             self.previous_error = self.error
 
             #print("Output by PId: "+str(output))
-            if output>1500:
-                output = 1500
-
-            if output<-1500:
-                output = -1500
 
             output = int(output)
+            if output<0:
+                output = output * -1
 
             if self.ultrasonicManager.getEmergencyStopState()==False :
                 speed = self.egoCar.getScaledSpeed()
                 speed_in_km = self.egoCar.getSpeed()
                 if int(speed_in_km) ==0:
-                    return
+                    PWM.setMotorModel(0,0,0,0)
 
                 # if speed_in_km > 40:
                 #     self.kp = 18
@@ -64,15 +59,17 @@ class CamLaneTracking:
                 #     self.kp = 22
 
                 # speed reduction on curves
-                if self.error >40 and self.egoCar.getSpeed()>70:
-                    speed = int(speed * 0.8)
+                # if self.error >40 and self.egoCar.getSpeed()>70:
+                #     speed = int(speed * 0.8)
+
                 if self.error > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                 else:
-                    PWM.setMotorModel(-speed-output,-speed-output,-speed,-speed)
+                    #PWM.setMotorModel(-speed-output,-speed-output,-speed,-speed)
+                    PWM.setMotorModel(-speed+output,-speed+output,-speed,-speed)
             else:
-                pass
-                #self.egoCar.setSpeed(0)
+                #pass
+                self.egoCar.setSpeed(0)
 
             time.sleep(0.005)
 
