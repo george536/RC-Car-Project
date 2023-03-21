@@ -15,6 +15,8 @@ from MQTT.topics import Topic
 from MQTT.CarInfo import CarInfo
 from CameraLaneDetection.CameraLaneDetection import CameraLaneDetection
 from CameraLaneDetection.CamLaneTracking import CamLaneTracking
+from CameraLaneDetection.PIDTuning import SliderInterface
+
 
 # driving scenario thread
 class DrivingScenario(Thread):
@@ -74,6 +76,16 @@ class CameraDetection(Thread):
 			self.CamLaneTracking.update()
 
 
+class Slider(Thread):
+    def __init__(self):
+        suprer.__init__()
+
+    def run(self):
+        root = tk.Tk()
+        slider_interface = SliderInterface(root)
+        root.mainloop() 
+
+
 # this class represents the car running this code
 class Egocar:
 	def __init__(self):
@@ -108,6 +120,7 @@ def main():
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
+    threads.append(Slider())
 
 
     for thread in threads:

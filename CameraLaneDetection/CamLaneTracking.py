@@ -10,10 +10,10 @@ class CamLaneTracking:
 
         # PID values
         # good was 22
-        self.kp =3
-        self.ki = 1E-5
+        self.kp =DetectionData.kp
+        self.ki = DetectionData.ki
         # 0.001 origionally
-        self.kd = 0.005
+        self.kd = DetectionData.kd
 
         self.error = 0
         self.integral = 0
@@ -21,6 +21,9 @@ class CamLaneTracking:
         self.last_time = time.time()
 
     def update(self):
+            self.kp =DetectionData.kp
+            self.ki = DetectionData.ki
+            self.kd = DetectionData.kd
 
             self.error = DetectionData.location
             
