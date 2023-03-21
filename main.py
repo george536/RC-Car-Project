@@ -75,7 +75,7 @@ class CameraDetection(Thread):
 		while True:
 			self.CamLaneTracking.update()
 
-
+import tkinter as tk
 class Slider(Thread):
     def __init__(self):
         super().__init__()
