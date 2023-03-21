@@ -2,11 +2,11 @@ import tkinter as tk
 from .DetectionData import DetectionData
 
 def updateKI(ki):
-    DetectionData.ki = ki
+    DetectionData.ki = float(ki)
 def updateKd(kd):
-    DetectionData.kd = kd
+    DetectionData.kd = float(kd)
 def updateKp(kp): 
-    DetectionData.kp = kp
+    DetectionData.kp = float(kp)
 
 class SliderInterface:
     def __init__(self, master):
