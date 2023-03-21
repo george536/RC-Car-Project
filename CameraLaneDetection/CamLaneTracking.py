@@ -23,7 +23,7 @@ class CamLaneTracking:
     def update(self):
 
             self.error = DetectionData.location
-            print(self.error)
+            
             t = time.time()
             dt = t-self.last_time
 
@@ -36,13 +36,16 @@ class CamLaneTracking:
             if integral > 400:
                 integral = 400
 
-            output = proportional  + derivative
+            output = proportional + derivative
 
             self.previous_error = self.error
 
-            #print("Output by PId: "+str(output))
+            print("Output by PId: "+str(output))
             if output>2000:
                 output = 2000
+
+            if output<-2000:
+                output = -2000
 
             output = int(output)
 
