@@ -83,7 +83,6 @@ class Slider(Thread):
     def run(self):
         root = tk.Tk()
         slider_interface = SliderInterface(root)
-        root.mainloop() 
 
 
 # this class represents the car running this code

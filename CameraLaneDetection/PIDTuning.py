@@ -32,4 +32,7 @@ class SliderInterface:
         self.slider3.pack()
 
 
+        self.master.mainloop() 
+
+
 
