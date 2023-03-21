@@ -23,7 +23,7 @@ class CamLaneTracking:
     def update(self):
 
             self.error = DetectionData.location
-
+            print(self.error)
             t = time.time()
             dt = t-self.last_time
 
@@ -41,7 +41,8 @@ class CamLaneTracking:
             self.previous_error = self.error
 
             #print("Output by PId: "+str(output))
-
+            if output>2000:
+                output = 2000
 
             output = int(output)
 
