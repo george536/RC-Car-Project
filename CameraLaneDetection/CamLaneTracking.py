@@ -13,7 +13,7 @@ class CamLaneTracking:
         self.kp =3
         self.ki = 1E-5
         # 0.001 origionally
-        self.kd = -0.005
+        self.kd = 0.005
 
         self.error = 0
         self.integral = 0
