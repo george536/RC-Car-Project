@@ -13,7 +13,7 @@ class CamLaneTracking:
         self.kp =14
         self.ki = 1E-5
         # 0.001 origionally
-        self.kd = 0.0001
+        self.kd = 0.00005
 
         self.error = 0
         self.integral = 0
@@ -33,10 +33,10 @@ class CamLaneTracking:
 
             #  (self.integral * self.ki) causing NaN
             integral = (self.integral * self.ki)
-            if integral > 1000:
-                integral = 1000
+            if integral > 400:
+                integral = 400
 
-            output = proportional + integral +derivative
+            output = proportional + integral + derivative
 
             self.previous_error = self.error
 
