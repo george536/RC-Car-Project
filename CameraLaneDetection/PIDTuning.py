@@ -10,7 +10,6 @@ def updateKp(kp):
 
 class SliderInterface:
     def __init__(self, master):
-        print("Ssssss")
         self.master = master
         master.title("Slider Interface")
 
