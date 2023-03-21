@@ -10,10 +10,10 @@ class CamLaneTracking:
 
         # PID values
         # good was 22
-        self.kp =14
+        self.kp =22
         self.ki = 1E-5
         # 0.001 origionally
-        self.kd = 0.00005
+        self.kd = 0.0001
 
         self.error = 0
         self.integral = 0
@@ -36,7 +36,7 @@ class CamLaneTracking:
             if integral > 400:
                 integral = 400
 
-            output = proportional + integral + derivative
+            output = proportional  + derivative
 
             self.previous_error = self.error
 
