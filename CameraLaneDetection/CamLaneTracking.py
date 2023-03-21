@@ -9,10 +9,11 @@ class CamLaneTracking:
         self.egoCar = egoCar
 
         # PID values
-        # good was 20
-        self.kp =22
+        # good was 22
+        self.kp =21
         self.ki = 0
-        self.kd = 0.001
+        # 0.001 origionally
+        self.kd = 0.01
 
         self.error = 0
         self.integral = 0
