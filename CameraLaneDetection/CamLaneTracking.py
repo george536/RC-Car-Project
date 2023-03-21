@@ -11,7 +11,7 @@ class CamLaneTracking:
         # PID values
         # good was 22
         self.kp =14
-        self.ki = 0
+        self.ki = 1E-5
         # 0.001 origionally
         self.kd = 0.0001
 
@@ -32,8 +32,11 @@ class CamLaneTracking:
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
             #  (self.integral * self.ki) causing NaN
+            integral = (self.integral * self.ki)
+            if integral > 1000:
+                integral = 1000
 
-            output = proportional + derivative
+            output = proportional + integral +derivative
 
             self.previous_error = self.error
 
