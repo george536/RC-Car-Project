@@ -10,7 +10,7 @@ class CamLaneTracking:
 
         # PID values
         # good was 22
-        self.kp =8
+        self.kp =5
         self.ki = 1E-5
         # 0.001 origionally
         self.kd = -0.0001
@@ -41,11 +41,11 @@ class CamLaneTracking:
             self.previous_error = self.error
 
             print("Output by PId: "+str(output))
-            if output>2000:
-                output = 2000
+            if output>1500:
+                output = 1500
 
-            if output<-2000:
-                output = -2000
+            if output<-1500:
+                output = -1500
 
             output = int(output)
 
