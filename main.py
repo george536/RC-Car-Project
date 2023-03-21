@@ -78,7 +78,7 @@ class CameraDetection(Thread):
 
 class Slider(Thread):
     def __init__(self):
-        suprer.__init__()
+        super().__init__()
 
     def run(self):
         root = tk.Tk()
