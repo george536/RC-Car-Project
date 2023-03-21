@@ -10,10 +10,10 @@ class CamLaneTracking:
 
         # PID values
         # good was 22
-        self.kp =2
+        self.kp =3
         self.ki = 1E-5
         # 0.001 origionally
-        self.kd = -0.0001
+        self.kd = -0.005
 
         self.error = 0
         self.integral = 0
