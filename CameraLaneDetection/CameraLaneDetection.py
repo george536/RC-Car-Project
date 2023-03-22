@@ -57,6 +57,7 @@ class CameraLaneDetection(Thread):
                 if area > largest_area:
                     largest_area = area
                     largest_contour = contour
+                    print("area "+str(largest_area))
 
             cnt = largest_contour
             M = cv2.moments(cnt)
