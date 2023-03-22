@@ -57,7 +57,6 @@ class CameraLaneDetection(Thread):
                 if area > largest_area:
                     largest_area = area
                     largest_contour = contour
-                    print("area "+str(largest_area))
 
             cnt = largest_contour
             M = cv2.moments(cnt)
@@ -76,8 +75,11 @@ class CameraLaneDetection(Thread):
                 break
 
             middle = (img.shape[1]/2)
-            #off_value = -(middle-cx)
-            off_value = -((middle-cx)/middle)*100
+            if largest_area>400:
+                #off_value = -(middle-cx)
+                off_value = -((middle-cx)/middle)*100
+            else:
+                off_value = 0
 
             #prev_vals.append(off_value)
 
