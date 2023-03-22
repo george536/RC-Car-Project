@@ -129,19 +129,35 @@ def main():
         thread.join()
 
 
-try: 
-    main()
-except Exception as e:
-    print(e)
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
+# try: 
+#     main()
+# except Exception as e:
+#     print(e)
+#     PWM.setMotorModel(0,0,0,0)
+#     PWM.setMotorModel(0,0,0,0)
+#     PWM.setMotorModel(0,0,0,0)
+#     PWM.setMotorModel(0,0,0,0)
 
-    try:
-        sys.exit(130)
-    except SystemExit:
-        os._exit(130)
+#     try:
+#         sys.exit(130)
+#     except SystemExit:
+#         os._exit(130)
+
+
+import signal
+import threading
+
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    # Exit all threads
+    threading.Thread._active.clear()
+    # Exit the main thread
+    raise SystemExit
+
+
+signal.signal(signal.SIGINT, signal_handler)
+
+
 
 
 
