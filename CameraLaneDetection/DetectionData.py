@@ -2,6 +2,6 @@ class DetectionData:
 
     location = 0
 
-    kp =3
+    kp = 20
     ki = 0
-    kd = 0.005
+    kd = 0

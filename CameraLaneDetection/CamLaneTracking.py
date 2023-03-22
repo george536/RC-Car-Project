@@ -36,6 +36,9 @@ class CamLaneTracking:
 
             #  (self.integral * self.ki) causing NaN
             integral = (self.integral * self.ki)
+            
+            if math.isnan(integral):
+                integral = 0
 
             output = proportional + integral + derivative
 
