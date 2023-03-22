@@ -1,6 +1,6 @@
 import os
 commands = [
-    'sudo apt install cv2'
+    'sudo apt install python.cv2'
 ]
 
 for cmd in commands:
