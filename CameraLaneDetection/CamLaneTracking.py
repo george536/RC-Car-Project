@@ -26,6 +26,9 @@ class CamLaneTracking:
             self.kd = int(DetectionData.kd)
 
             self.error = DetectionData.location
+
+            if self.error == None:
+                return
             
             t = time.time()
             dt = t-self.last_time

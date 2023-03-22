@@ -79,7 +79,7 @@ class CameraLaneDetection(Thread):
                 #off_value = -(middle-cx)
                 off_value = -((middle-cx)/middle)*100
             else:
-                off_value = 0
+                off_value = None
 
             #prev_vals.append(off_value)
 
