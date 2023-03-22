@@ -2,6 +2,7 @@ from .UltrasonicObserver import *
 from MQTT.CarInfo import CarInfo
 from MQTT.topics import Topic
 from RcCarModules.led import Led
+from rpi_ws281x import *
 
 class CollisionDetection(UltrasonicObserver):
 	
