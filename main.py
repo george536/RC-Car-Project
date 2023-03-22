@@ -157,6 +157,8 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+main()
+
 
 
 
