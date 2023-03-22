@@ -26,4 +26,4 @@ class CollisionDetection(UltrasonicObserver):
 		else:
 			if self.observerManager.emergencyStop == True:
 			    self.observerManager.emergencyStop = False  
-				self.led.colorWipe(self.led.strip, Color(0,0,0),10)
+			    self.led.colorWipe(self.led.strip, Color(0,0,0),10)
