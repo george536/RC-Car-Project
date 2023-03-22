@@ -14,16 +14,16 @@ class SliderInterface:
         master.title("Slider Interface")
 
         # # Initialize variables
-        # self.kp = tk.DoubleVar()
-        # self.ki = tk.DoubleVar()
-        # self.kd = tk.DoubleVar()
+        self.kp = tk.DoubleVar()
+        self.ki = tk.DoubleVar()
+        self.kd = tk.DoubleVar()
 
         # Create sliders
-        self.slider1 = tk.Scale(master, from_=0, to=25, resolution=0.01, variable=DetectionData.kp, label="kp", command = updateKp)
+        self.slider1 = tk.Scale(master, from_=0, to=25, resolution=0.01, variable=self.kp, label="kp", command = updateKp)
         self.slider1.set(DetectionData.kp)
-        self.slider2 = tk.Scale(master, from_=0, to=1, resolution=0.0001, variable=DetectionData.ki, label="ki", command = updateKI)
+        self.slider2 = tk.Scale(master, from_=0, to=1, resolution=0.0001, variable=self.ki, label="ki", command = updateKI)
         self.slider2.set(DetectionData.ki)
-        self.slider3 = tk.Scale(master, from_=0, to=1, resolution=0.0001, variable=DetectionData.kd, label="kd", command = updateKd)
+        self.slider3 = tk.Scale(master, from_=0, to=1, resolution=0.0001, variable=self.kd, label="kd", command = updateKd)
         self.slider3.set(DetectionData.kd)
 
         # Pack sliders into the window
