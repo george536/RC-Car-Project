@@ -36,7 +36,7 @@ class CamLaneTracking:
 
             #  (self.integral * self.ki) causing NaN
             integral = (self.integral * self.ki)
-            
+
             if math.isnan(integral):
                 integral = 0
 
@@ -53,8 +53,10 @@ class CamLaneTracking:
             if self.ultrasonicManager.getEmergencyStopState()==False :
                 speed = self.egoCar.getScaledSpeed()
                 speed_in_km = self.egoCar.getSpeed()
+
                 if int(speed_in_km) ==0:
                     PWM.setMotorModel(0,0,0,0)
+                    return
 
                 # if speed_in_km > 40:
                 #     self.kp = 18
