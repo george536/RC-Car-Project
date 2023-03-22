@@ -28,6 +28,7 @@ class CamLaneTracking:
             self.error = DetectionData.location
 
             if self.error == None:
+                PWM.setMotorModel(0,0,0,0)
                 return
             
             t = time.time()
