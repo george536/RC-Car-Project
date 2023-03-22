@@ -145,18 +145,20 @@ def main():
 
 
 import signal
-import keyboard
+from pynput.keyboard import Key, Controller
 
 # Press and release the ctrl+c keys
 
+keyboard = Controller()
 
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
     # Exit all threads
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
+    for _ in range(3):
+        keyboard.press(Key.ctrl)
+        keyboard.press('c')
+        keyboard.release('c')
+        keyboard.release(Key.ctrl)
     # Exit the main thread
     raise SystemExit
 
