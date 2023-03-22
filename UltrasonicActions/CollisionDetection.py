@@ -11,7 +11,7 @@ class CollisionDetection(UltrasonicObserver):
 		self.observerManager = observerManager
 		observerManager.attach(self)
 		self.likelyhood = 0
-		self.minimum = 15 # default minimum distance in cm
+		self.minimum = 10 # default minimum distance in cm
 		self.led = Led()
 		
 	def update(self):
