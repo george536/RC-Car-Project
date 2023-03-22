@@ -13,10 +13,10 @@ class SliderInterface:
         self.master = master
         master.title("Slider Interface")
 
-        # Initialize variables
-        self.kp = tk.DoubleVar()
-        self.ki = tk.DoubleVar()
-        self.kd = tk.DoubleVar()
+        # # Initialize variables
+        # self.kp = tk.DoubleVar()
+        # self.ki = tk.DoubleVar()
+        # self.kd = tk.DoubleVar()
 
         # Create sliders
         self.slider1 = tk.Scale(master, from_=0, to=25, resolution=0.01, variable=DetectionData.kp, label="kp", command = updateKp)
