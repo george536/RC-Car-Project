@@ -1,6 +1,6 @@
 import os
 commands = [
-    'sudo apt install python.cv2'
+    'sudo apt install opencv-python'
 ]
 
 for cmd in commands:
