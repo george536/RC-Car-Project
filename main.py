@@ -145,7 +145,7 @@ def main():
 
 
 import signal
-import keyboard
+import pyautogui
 
 # Press and release the ctrl+c keys
 
@@ -153,10 +153,10 @@ import keyboard
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
     # Exit all threads
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
-    keyboard.press_and_release('ctrl+c')
+    pyautogui.hotkey('ctrl', 'c')
+    pyautogui.hotkey('ctrl', 'c')
+    pyautogui.hotkey('ctrl', 'c')
+    pyautogui.hotkey('ctrl', 'c')
     # Exit the main thread
     raise SystemExit
 
