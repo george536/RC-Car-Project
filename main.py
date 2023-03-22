@@ -145,12 +145,18 @@ def main():
 
 
 import signal
-import threading
+import keyboard
+
+# Press and release the ctrl+c keys
+
 
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
     # Exit all threads
-    threading.Thread._active.clear()
+    keyboard.press_and_release('ctrl+c')
+    keyboard.press_and_release('ctrl+c')
+    keyboard.press_and_release('ctrl+c')
+    keyboard.press_and_release('ctrl+c')
     # Exit the main thread
     raise SystemExit
 
