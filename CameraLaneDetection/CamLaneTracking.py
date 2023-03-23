@@ -35,7 +35,7 @@ class CamLaneTracking:
             dt = t-self.last_time
 
             proportional =  self.kp * self.error
-            self.integral += min(4096-400, self.integral + self.error * dt)
+            self.integral += self.error * dt
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
             #  (self.integral * self.ki) causing NaN
@@ -81,6 +81,6 @@ class CamLaneTracking:
                 pass
                 #self.egoCar.setSpeed(0)
 
-            time.sleep(0.005)
+            #time.sleep(0.005)
 
             self.last_time = time.time()
