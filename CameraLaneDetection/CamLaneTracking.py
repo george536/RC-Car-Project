@@ -44,8 +44,9 @@ class CamLaneTracking:
             if math.isnan(integral):
                 integral = 0
 
-            integral = max(integral, 2000)
-            integral = min(integral, -2000)
+            if integral!=0:
+                integral = max(integral, 2000)
+                integral = min(integral, -2000)
 
             output = proportional + integral + derivative
 
