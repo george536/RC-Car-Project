@@ -19,11 +19,11 @@ class SliderInterface:
         self.kd = tk.DoubleVar()
 
         # Create sliders
-        self.slider1 = tk.Scale(master, from_=0, to=50, resolution=0.01, variable=self.kp, label="kp", command = updateKp)
+        self.slider1 = tk.Scale(master, from_=0, to=50, length=200, resolution=0.01, variable=self.kp, label="kp", command = updateKp)
         self.slider1.set(DetectionData.kp)
-        self.slider2 = tk.Scale(master, from_=0, to=5, resolution=0.00001, variable=self.ki, label="ki", command = updateKI)
+        self.slider2 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.ki, label="ki", command = updateKI)
         self.slider2.set(DetectionData.ki)
-        self.slider3 = tk.Scale(master, from_=0, to=5, resolution=0.00001, variable=self.kd, label="kd", command = updateKd)
+        self.slider3 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.kd, label="kd", command = updateKd)
         self.slider3.set(DetectionData.kd)
 
         # Pack sliders into the window
