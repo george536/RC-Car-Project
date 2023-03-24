@@ -48,7 +48,7 @@ class CamLaneTracking:
                 integral = max(integral, 2000)
                 integral = min(integral, -2000)
 
-            output = proportional + integral + derivative
+            output = proportional - integral + derivative
 
             self.previous_error = self.error
 
