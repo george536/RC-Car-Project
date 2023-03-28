@@ -36,7 +36,7 @@ class CamLaneTracking:
             self.error = abs(self.error)
             
 
-            if abs(self.error) > 35:
+            if abs(self.error) > 45:
                 self.kp = 50
                 self.ki = 0.0001
                 self.kd = 0.9
