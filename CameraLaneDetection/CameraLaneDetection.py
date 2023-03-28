@@ -76,7 +76,7 @@ class CameraLaneDetection(Thread):
 
             #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
 
-            #cv2.imshow('image', img)
+            cv2.imshow('image', img)
 
 
             print(time.time()-self.last_time)
