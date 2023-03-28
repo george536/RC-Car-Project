@@ -61,7 +61,7 @@ class CamLaneTracking:
 
             self.previous_error = self.error
 
-            print("Output by PId: "+str(output))
+            #print("Output by PId: "+str(output))
 
             output = int(output)
 
