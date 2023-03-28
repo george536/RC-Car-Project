@@ -36,10 +36,10 @@ class CamLaneTracking:
             self.error = abs(self.error)
             
 
-            if abs(self.error) > 45:
-                self.kp = 50
-                self.ki = 0.0001
-                self.kd = 0.9
+            # if abs(self.error) > 45:
+            #     self.kp = 50
+            #     self.ki = 0.0001
+            #     self.kd = 0.9
             
             t = time.time()
             dt = t-self.last_time
@@ -80,8 +80,8 @@ class CamLaneTracking:
                 #     self.kp = 22
 
                 # speed reduction on curves
-                if self.error > 25:
-                    speed = int(speed * self.error/100)
+                # if self.error > 25:
+                #     speed = int(speed * self.error/100)
 
                 fixValue = -speed+output
                 if (fixValue)>0:
