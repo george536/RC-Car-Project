@@ -26,7 +26,7 @@ class CamLaneTracking:
             self.kd = int(DetectionData.kd)
 
             self.error = DetectionData.location
-
+            print(self.error)
             if self.error == None:
                 PWM.setMotorModel(0,0,0,0)
                 return
@@ -57,7 +57,7 @@ class CamLaneTracking:
 
             self.previous_error = self.error
 
-            #print("Output by PId: "+str(output))
+            print("Output by PId: "+str(output))
 
             output = int(output)
 

@@ -31,8 +31,6 @@ class CameraLaneDetection(Thread):
         counter = 0
 
 
-        self.last_time = time.time()
-
         while True:
             img = picam2.capture_array()
             #print(img.shape)
@@ -77,10 +75,6 @@ class CameraLaneDetection(Thread):
             #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
 
             #cv2.imshow('image', img)
-
-
-            print(time.time()-self.last_time)
-            self.last_time = time.time()
 
             # Wait longer to prevent freeze for videos.
             if cv2.waitKey(10) & 0xFF == ord('q'):
