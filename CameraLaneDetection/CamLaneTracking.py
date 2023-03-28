@@ -39,7 +39,7 @@ class CamLaneTracking:
             if abs(self.error) > 35:
                 self.kp = 30
                 self.ki = 0
-                self.kd = 0.01
+                self.kd = 0.3
             
             t = time.time()
             dt = t-self.last_time
