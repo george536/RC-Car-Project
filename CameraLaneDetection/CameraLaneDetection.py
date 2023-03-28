@@ -74,7 +74,7 @@ class CameraLaneDetection(Thread):
             cx = int(M['m10'] / moment_0)
             cy = int(M['m01'] / moment_0)
 
-            #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
+            cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
 
             cv2.imshow('image', img)
 
