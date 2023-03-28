@@ -77,7 +77,7 @@ class CameraLaneDetection(Thread):
 
 
             print(time.time()-self.last_time)
-            self.last_time = time.time()-self.last_time
+            self.last_time = time.time()
 
             # Wait longer to prevent freeze for videos.
             if cv2.waitKey(10) & 0xFF == ord('q'):
