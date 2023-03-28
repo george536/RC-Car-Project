@@ -25,7 +25,8 @@ class CamLaneTracking:
             self.ki = int(DetectionData.ki)
             self.kd = int(DetectionData.kd)
 
-            self. error = DetectionData.location
+            self.error = DetectionData.location
+            origionalError = DetectionData.location
 
             if self.error == None:
                 PWM.setMotorModel(0,0,0,0)
@@ -82,7 +83,7 @@ class CamLaneTracking:
                 # if self.error >40 and self.egoCar.getSpeed()>70:
                 #     speed = int(speed * 0.8)
 
-                if self.error > 0:
+                if origionalError > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                 else:
                     PWM.setMotorModel(-speed+output,-speed+output,-speed,-speed)
