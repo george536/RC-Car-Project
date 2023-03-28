@@ -89,7 +89,7 @@ class Slider(Thread):
 class Egocar:
 	def __init__(self):
 		# speed in Km/h
-		self.speed = 35
+		self.speed = 5
 
 	def getSpeed(self):
 		return self.speed
