@@ -35,6 +35,8 @@ class CameraLaneDetection(Thread):
 
         while True:
             img = picam2.capture_array()
+            img = cv2.resize(img, (480,360), interpolation = cv2.INTER_AREA)
+
             img = img[240:,:]
 
             # Set minimum and max HSV values to display
