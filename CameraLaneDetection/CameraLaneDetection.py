@@ -36,7 +36,7 @@ class CameraLaneDetection(Thread):
         while True:
             img = picam2.capture_array()
             print(img.shape)
-            img = cv2.resize(img, (240,320), interpolation = cv2.INTER_AREA)
+            img = cv2.resize(img, (320,240), interpolation = cv2.INTER_AREA)
             print('after', img.shape)
             img = img[240:,:]
 
