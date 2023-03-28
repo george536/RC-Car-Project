@@ -81,7 +81,7 @@ class CamLaneTracking:
 
                 # speed reduction on curves
                 if self.error > 40:
-                    speed = int(speed * 0.7)
+                    speed = int(speed * 0.4)
 
                 fixValue = -speed+output
                 if (fixValue)>0:
