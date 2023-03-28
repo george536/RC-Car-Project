@@ -31,9 +31,9 @@ class CamLaneTracking:
                 PWM.setMotorModel(0,0,0,0)
                 return
     
-            self.error = abs(self.error)
             print(self.error)
-
+            self.error = abs(self.error)
+            
 
             # if abs(self.error) > 35:
             #     self.kp = 10
