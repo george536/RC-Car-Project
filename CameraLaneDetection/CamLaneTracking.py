@@ -87,6 +87,10 @@ class CamLaneTracking:
                 if (fixValue)>0:
                     fixValue = 0
 
+                if origionalError == None:
+                    PWM.setMotorModel(0,0,0,0)
+                    return
+
                 if origionalError > 0:
                     PWM.setMotorModel(-speed,-speed,fixValue,fixValue)
                 else:
