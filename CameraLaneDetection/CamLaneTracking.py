@@ -78,6 +78,9 @@ class CamLaneTracking:
                 # if self.error >40 and self.egoCar.getSpeed()>70:
                 #     speed = int(speed * 0.8)
 
+                PWM.setMotorModel(0,0,-speed+output,-speed+output)
+                return
+
                 if self.error > 0:
                     PWM.setMotorModel(-speed,-speed,-speed+output,-speed+output)
                 else:
