@@ -31,10 +31,10 @@ class CamLaneTracking:
                 PWM.setMotorModel(0,0,0,0)
                 return
 
-            if abs(self.error) > 35:
-                self.kp = 25
-                self.ki = 0
-                self.kd = 0
+            # if abs(self.error) > 35:
+            #     self.kp = 25
+            #     self.ki = 0
+            #     self.kd = 0
             
             t = time.time()
             dt = t-self.last_time
@@ -50,10 +50,10 @@ class CamLaneTracking:
                 integral = 0
 
             if integral!=0:
-                integral = max(integral, 2000)
-                integral = min(integral, -2000)
+                integral = min(integral, 2000)
+                integral = max(integral, -2000)
 
-            output = proportional - integral - derivative
+            output = proportional + integral + derivative
 
             self.previous_error = self.error
 

@@ -35,9 +35,9 @@ class CameraLaneDetection(Thread):
 
         while True:
             img = picam2.capture_array()
-            print(img.shape)
+            #print(img.shape)
             img = cv2.resize(img, (240,320), interpolation = cv2.INTER_AREA)
-            print('after', img.shape)
+            #print('after', img.shape)
             img = img[240:,:]
 
             # Set minimum and max HSV values to display
@@ -74,9 +74,9 @@ class CameraLaneDetection(Thread):
             cx = int(M['m10'] / moment_0)
             cy = int(M['m01'] / moment_0)
 
-            cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
+            #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
 
-            cv2.imshow('image', img)
+            #cv2.imshow('image', img)
 
 
             print(time.time()-self.last_time)
