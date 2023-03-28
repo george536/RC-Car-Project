@@ -32,7 +32,7 @@ class CamLaneTracking:
                 return
 
             if abs(self.error) > 35:
-                self.kp = 21
+                self.kp = 40
                 self.ki = 0
                 self.kd = 0
             
