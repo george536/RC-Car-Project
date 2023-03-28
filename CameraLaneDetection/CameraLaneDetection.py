@@ -8,6 +8,7 @@ import json
 from picamera2 import Picamera2, Preview
 from threading import Thread
 from .DetectionData import DetectionData
+import time
 
 picam2 = Picamera2()
 picam2.start()
@@ -28,6 +29,9 @@ class CameraLaneDetection(Thread):
         prev_vals = []
         prev = 0
         counter = 0
+
+
+        self.last_time = time.time()
 
         while True:
             img = picam2.capture_array()
@@ -67,9 +71,14 @@ class CameraLaneDetection(Thread):
             cx = int(M['m10'] / moment_0)
             cy = int(M['m01'] / moment_0)
 
-            cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
+            #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
 
-            cv2.imshow('image', img)
+            #cv2.imshow('image', img)
+
+
+            print(time.time()-self.last_time)
+            self.last_time = time.time()-self.last_time
+
             # Wait longer to prevent freeze for videos.
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break

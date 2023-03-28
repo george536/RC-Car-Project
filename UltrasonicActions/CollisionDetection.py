@@ -22,7 +22,7 @@ class CollisionDetection(UltrasonicObserver):
 			    self.observerManager.emergencyStop = True
 			    PWM.setMotorModel(0,0,0,0)
 			    self.led.colorWipe(self.led.strip, Color(255, 0, 0))
-			    print("Emergency Stop "+str(ultrasonic.get_distance()))
+			    #print("Emergency Stop "+str(ultrasonic.get_distance()))
 		else:
 			if self.observerManager.emergencyStop == True:
 			    self.observerManager.emergencyStop = False  
