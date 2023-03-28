@@ -4,4 +4,4 @@ class DetectionData:
 
     kp = 22
     ki = 0
-    kd = 0.001
+    kd = 0.3
