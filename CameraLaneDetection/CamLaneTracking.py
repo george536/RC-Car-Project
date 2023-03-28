@@ -80,8 +80,8 @@ class CamLaneTracking:
                 #     self.kp = 22
 
                 # speed reduction on curves
-                # if self.error >40 and self.egoCar.getSpeed()>70:
-                #     speed = int(speed * 0.8)
+                if self.error > 40:
+                    speed = int(speed * 0.7)
 
                 fixValue = -speed+output
                 if (fixValue)>0:
