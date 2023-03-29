@@ -22,13 +22,13 @@ class SliderInterface:
         self.testSpeed = tk.DoubleVar()
 
         # Create sliders
-        self.slider1 = tk.Scale(master, from_=0, to=50, length=200, resolution=0.01, variable=self.kp, label="kp", command = updateKp)
+        self.slider1 = tk.Scale(master, from_=0, to=50, length=200, resolution=0.01, variable=self.kp, label="kp", command = updateKp, orient="horizontal")
         self.slider1.set(DetectionData.kp)
-        self.slider2 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.ki, label="ki", command = updateKI)
+        self.slider2 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.ki, label="ki", command = updateKI, orient="horizontal")
         self.slider2.set(DetectionData.ki)
-        self.slider3 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.kd, label="kd", command = updateKd)
+        self.slider3 = tk.Scale(master, from_=0, to=5, length=200, resolution=0.00001, variable=self.kd, label="kd", command = updateKd, orient="horizontal")
         self.slider3.set(DetectionData.kd)
-        self.slider4 = tk.Scale(master, from_=0, to=120, length=200, resolution=1, variable=self.testSpeed, label="speed", command = updateSpeed)
+        self.slider4 = tk.Scale(master, from_=0, to=120, length=200, resolution=1, variable=self.testSpeed, label="speed", command = updateSpeed, orient="horizontal")
         self.slider4.set(DetectionData.kd)
 
         # Pack sliders into the window
