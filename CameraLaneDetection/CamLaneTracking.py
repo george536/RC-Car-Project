@@ -96,12 +96,12 @@ class CamLaneTracking:
                 back_rotation_error= 43
                 if origionalError > 0:
                     if self.error>back_rotation_error:
-                        PWM.setMotorModel(-speed,int(-speed*1.1),fixValue,fixValue)
+                        PWM.setMotorModel(-speed,int(-speed*(1.1+(speed*100/120))),fixValue,fixValue)
                     else:
                         PWM.setMotorModel(-speed,-speed,fixValue,fixValue)
                 else:
                     if self.error>back_rotation_error:
-                        PWM.setMotorModel(fixValue,fixValue,-speed,int(-speed*1.1))
+                        PWM.setMotorModel(fixValue,fixValue,-speed,int(-speed*1.1+(speed*100/120)))
                     else:
                         PWM.setMotorModel(fixValue,fixValue,-speed,-speed)
                     
