@@ -28,6 +28,8 @@ class CamLaneTracking:
             self.error = DetectionData.location
             origionalError = DetectionData.location
 
+            PWM.setMotorModel(0,-900,0,-900)
+            return
 
             if self.error == None:
                 PWM.setMotorModel(0,0,0,0)
@@ -93,17 +95,10 @@ class CamLaneTracking:
                     PWM.setMotorModel(0,0,0,0)
                     return
 
-                back_rotation_error= 43
                 if origionalError > 0:
-                    if self.error>back_rotation_error:
-                        PWM.setMotorModel(-speed,int(-speed*(1.1+(speed*100/120))),fixValue,fixValue)
-                    else:
-                        PWM.setMotorModel(-speed,-speed,fixValue,fixValue)
+                    PWM.setMotorModel(-speed,-speed,fixValue,fixValue)
                 else:
-                    if self.error>back_rotation_error:
-                        PWM.setMotorModel(fixValue,fixValue,-speed,int(-speed*(1.1+(speed*100/120))))
-                    else:
-                        PWM.setMotorModel(fixValue,fixValue,-speed,-speed)
+                    PWM.setMotorModel(fixValue,fixValue,-speed,-speed)
                     
             else:
                 pass
