@@ -114,7 +114,7 @@ def main():
     mqttClient = mqtt.getClient()
 
     #threads.append(DrivingScenario(ultrasonicManager,egoCar))
-    threads.append(detectCollision(ultrasonicManager))
+    #threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
