@@ -44,7 +44,7 @@ class CamLaneTracking:
 
             # kp equation: 0.084x+21.43
             # kd equation: 0.0538x+0.676
-            self.kp = (0.084*DetectionData.testSpeed)+21.43
+            self.kp = (0.07*DetectionData.testSpeed)+21.2
             self.ki = 0
             self.kd = (0.040*DetectionData.testSpeed)+0.60
             
