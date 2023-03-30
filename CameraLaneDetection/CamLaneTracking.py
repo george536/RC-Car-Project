@@ -45,7 +45,7 @@ class CamLaneTracking:
             # kp equation: 0.084x+21.43
             # kd equation: 0.0538x+0.676
             speed = self.egoCar.getScaledSpeed()
-            self.kp = (0.07*speed)+21.2
+            self.kp = (0.084*speed)+21.43
             self.ki = 0
             self.kd = (0.040*speed)+0.60
             
