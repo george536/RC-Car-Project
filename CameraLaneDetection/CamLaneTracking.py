@@ -47,7 +47,7 @@ class CamLaneTracking:
             speed = self.egoCar.getScaledSpeed()
             self.kp = (0.084*speed)+21.43
             self.ki = 0
-            self.kd = (0.06*speed)+0.676
+            self.kd = (0.0538*speed)+0.676
             
             t = time.time()
             dt = t-self.last_time
