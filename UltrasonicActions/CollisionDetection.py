@@ -17,7 +17,7 @@ class CollisionDetection(UltrasonicObserver):
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
 		    self.likelyhood += 1
-		    if self.likelyhood >=3:
+		    if self.likelyhood >=20:
 			    self.likelyhood = 0
 			    self.observerManager.emergencyStop = True
 			    PWM.setMotorModel(0,0,0,0)
