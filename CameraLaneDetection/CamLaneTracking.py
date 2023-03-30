@@ -33,7 +33,7 @@ class CamLaneTracking:
                 PWM.setMotorModel(0,0,0,0)
                 return
     
-            print(self.error)
+            #print(self.error)
             self.error = abs(self.error)
             
 
