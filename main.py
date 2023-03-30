@@ -116,10 +116,10 @@ def main():
     #threads.append(DrivingScenario(ultrasonicManager,egoCar))
     #threads.append(detectCollision(ultrasonicManager))
     #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
-    #threads.append(MQTTRunner(mqttClient))
+    threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
-    threads.append(Slider())
+    #threads.append(Slider())
 
 
     for thread in threads:
