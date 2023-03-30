@@ -21,9 +21,9 @@ class CamLaneTracking:
         self.last_time = time.time()
 
     def update(self):
-            self.kp = int(DetectionData.kp)
-            self.ki = int(DetectionData.ki)
-            self.kd = int(DetectionData.kd)
+            # self.kp = int(DetectionData.kp)
+            # self.ki = int(DetectionData.ki)
+            # self.kd = int(DetectionData.kd)
 
             self.error = DetectionData.location
             origionalError = DetectionData.location
@@ -110,8 +110,8 @@ class CamLaneTracking:
                     PWM.setMotorModel(fixValue,fixValue,-speed,-speed)
                     
             else:
-                pass
-                #self.egoCar.setSpeed(0)
+                #pass
+                self.egoCar.setSpeed(0)
 
             time.sleep(0.005)
 
