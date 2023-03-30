@@ -48,6 +48,10 @@ class CamLaneTracking:
             self.kp = (0.054*speed)+19.43
             self.ki = 0
             self.kd = (0.0538*speed)+0.676
+
+            self.kp = 20
+            self.ki = 0
+            self.kd = 0.1
             
             t = time.time()
             dt = t-self.last_time
@@ -109,6 +113,6 @@ class CamLaneTracking:
                 pass
                 #self.egoCar.setSpeed(0)
 
-            #time.sleep(0.005)
+            time.sleep(0.005)
 
             self.last_time = time.time()
