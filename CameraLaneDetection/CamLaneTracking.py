@@ -46,7 +46,7 @@ class CamLaneTracking:
             # kd equation: 0.0538x+0.676
             self.kp = (0.084*DetectionData.testSpeed)+21.43
             self.ki = 0
-            self.kd = (0.0538*DetectionData.testSpeed)+0.676
+            self.kd = (0.044*DetectionData.testSpeed)+0.68
             
             t = time.time()
             dt = t-self.last_time
