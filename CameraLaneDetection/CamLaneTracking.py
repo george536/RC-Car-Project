@@ -21,9 +21,9 @@ class CamLaneTracking:
         self.last_time = time.time()
 
     def update(self):
-            # self.kp = int(DetectionData.kp)
-            # self.ki = int(DetectionData.ki)
-            # self.kd = int(DetectionData.kd)
+            self.kp = int(DetectionData.kp)
+            self.ki = int(DetectionData.ki)
+            self.kd = int(DetectionData.kd)
 
             self.error = DetectionData.location
             origionalError = DetectionData.location
@@ -53,9 +53,9 @@ class CamLaneTracking:
             # self.ki = 0
             # self.kd = (0.0538*speed)+0.676
 
-            self.kp = 20
-            self.ki = 0
-            self.kd = 0.1
+            # self.kp = 20
+            # self.ki = 0
+            # self.kd = 0.1
             
             t = time.time()
             dt = t-self.last_time
