@@ -35,7 +35,7 @@ class CameraLaneDetection(Thread):
             mask = cv2.inRange(hsv, lower, upper)
             
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            cv2.drawContours(img, contours, -1, (0,255,0), 3)
+            #cv2.drawContours(img, contours, -1, (0,255,0), 3)
             
             if len(contours)==0:
                 continue
@@ -67,12 +67,13 @@ class CameraLaneDetection(Thread):
             middle = (img.shape[1]/2)
 
             if largest_area>400:
-                #off_value = -(middle-cx)
                 off_value = -((middle-cx)/middle)*100
             else:
                 off_value = None
 
             DetectionData.location = off_value
+
+            DetectionData.img = img
 
         video_cap.release()
         cv2.destroyAllWindows()

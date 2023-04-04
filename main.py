@@ -14,6 +14,7 @@ from MQTT.CarInfo import CarInfo
 from CameraLaneDetection.CameraLaneDetection import CameraLaneDetection
 from CameraLaneDetection.CamLaneTracking import CamLaneTracking
 from CameraLaneDetection.PIDTuning import SliderInterface
+from CameraLaneDetection.TrafficLightDetector import TrafficLightDetector
 import signal
 
 # Collision detection thread
@@ -105,6 +106,7 @@ def main():
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
+    threads.append(TrafficLightDetector())
 
     if "-testPID" in sys.argv:
         threads.append(Slider())

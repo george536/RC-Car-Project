@@ -8,5 +8,6 @@ class DetectionData:
     ki = 0
     kd = 0
 
-
     testSpeed = None
+
+    img = None
