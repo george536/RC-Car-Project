@@ -6,7 +6,7 @@ def updateKI(ki):
 
     ki = float(ki)
 
-    with open('cameraParameters.json', 'w') as file:
+    with open('CameraLaneDetection/PIDparameters.json', 'w') as file:
         global data
         data['ki'] = ki 
         json.dump(data, file)
@@ -17,7 +17,7 @@ def updateKd(kd):
 
     kd = float(kd)
 
-    with open('cameraParameters.json', 'w') as file:
+    with open('CameraLaneDetection/PIDparameters.json', 'w') as file:
         global data
         data['kd'] = kd 
         json.dump(data, file)
@@ -28,7 +28,7 @@ def updateKp(kp):
 
     kp = float(kp)
 
-    with open('cameraParameters.json', 'w') as file:
+    with open('CameraLaneDetection/PIDparameters.json', 'w') as file:
         global data
         data['kp'] = kp 
         json.dump(data, file)
