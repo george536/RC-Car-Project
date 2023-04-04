@@ -20,16 +20,16 @@ class CollisionDetection(UltrasonicObserver):
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
 
-		    self.likelihood += 1
+			self.likelihood += 1
 
-		    if self.likelihood >= self.likelihoodBound:
+			if self.likelihood >= self.likelihoodBound:
 
-			    self.likelihood = 0
-			    self.observerManager.emergencyStop = True
-			    self.carCommands.stop()
-			    self.led.colorWipe(self.led.strip, Color(100, 0, 0))
+				self.likelihood = 0
+				self.observerManager.emergencyStop = True
+				self.carCommands.stop()
+				self.led.colorWipe(self.led.strip, Color(100, 0, 0))
 
 		else:
 			if self.observerManager.emergencyStop == True:
-			    self.observerManager.emergencyStop = False  
-			    self.led.colorWipe(self.led.strip, Color(0,0,0),10)
+				self.observerManager.emergencyStop = False  
+				self.led.colorWipe(self.led.strip, Color(0,0,0),10)
