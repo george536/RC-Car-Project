@@ -36,7 +36,9 @@ class TrafficLightDetector(Thread):
                             largest_area = area
                             largest_contour = contour
                     if largest_area>400:
-                        print("red detected")
+                        DetectionData.currentlyAt['red'] = True
+                    else:
+                        DetectionData.currentlyAt['red'] = False
 
                 yellowContours, hierarchy = cv2.findContours(yellowMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -49,7 +51,9 @@ class TrafficLightDetector(Thread):
                             largest_area = area
                             largest_contour = contour
                     if largest_area>400:
-                        print("yellow detected")
+                        DetectionData.currentlyAt['yellow'] = True
+                    else:
+                        DetectionData.currentlyAt['yellow'] = False
 
             except:
                 continue

@@ -5,6 +5,7 @@ from paho import mqtt
 from .CarInfo import CarInfo 
 from .topics import Topic
 from HelperFunctions.CalculateDistance import *
+from CameraLaneDetection.DetectionData import DetectionData
 
 class MQTTCommunication:
 
@@ -48,6 +49,7 @@ class MQTTCommunication:
     def on_message(self,client, userdata, msg):
         # Speed messages
         speed_pattern = f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}"
+
         if speed_pattern==msg.topic:
             if self.ultrasonicManager.getEmergencyStopState()==False:
                 self.car.setSpeed(float(msg.payload.decode()))
@@ -58,6 +60,16 @@ class MQTTCommunication:
                 client.publish(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(CarInfo.carId)}", payload=str(0), qos=1)
                 client.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(1), qos=1)
 
+
+        # Traffic Light messages
+        red_pattern = f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.RED.value)}"
+        yellow_pattern = f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}"
+        if red_pattern==msg.topic:
+            DetectionData.CurrentTraffic['red'] = bool(msg.payload.decode())
+            DetectionData.CurrentTraffic['yellow'] = not bool(msg.payload.decode())
+        if yellow_pattern==msg.topic:
+            DetectionData.CurrentTraffic['red'] = not bool(msg.payload.decode())
+            DetectionData.CurrentTraffic['yellow'] = bool(msg.payload.decode())
 
 
 
