@@ -21,11 +21,14 @@ class DetectionData:
         'yellow':None,
         'red':None,
     }
+    
 
     def isStoppedAtTraffic():
         currentlyAt = DetectionData.currentlyAt
         CurrentTraffic = DetectionData.CurrentTraffic
-        if currentlyAt['yellow'] == None or currentlyAt['red'] == None:
+        print(currentlyAt)
+        print(CurrentTraffic)
+        if CurrentTraffic['yellow'] == None or CurrentTraffic['red'] == None:
             return False
         if currentlyAt['yellow'] and CurrentTraffic['yellow']:
             print("stopped at yellow")
