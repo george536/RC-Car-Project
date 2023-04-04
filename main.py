@@ -24,7 +24,7 @@ class detectCollision(Thread):
 		self.observerManager = ultrasonicManager
 
 		# modify these values to change settings of emergency stopping
-		stoppingDistance = 5
+		stoppingDistance = 10
 		likelihoodBound=1
 
 		CollisionDetection(self.observerManager,stoppingDistance,likelihoodBound)
@@ -119,10 +119,9 @@ def main():
 
 def signal_handler(sig, frame):
 	# this ultasonic manager is not attached to any observers, we only need this to use the stop function
-    #carCommands = CarCommands(UltrasonicManager())
+    carCommands = CarCommands(UltrasonicManager())
     # Exit all threads
     for _ in range(4):
-        continue
         carCommands.stop()
     # Exit the main thread
     sys.exit()
