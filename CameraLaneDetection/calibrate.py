@@ -38,7 +38,7 @@ phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    with open('cameraParameters.json', 'r') as file:
+    with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
         data = json.load(file)
 
     while True:
@@ -65,7 +65,7 @@ if __name__ == '__main__':
         data['sMax'] = sMax
         data['vMax'] = vMax
 
-        with open('cameraParameters.json', 'w') as file:
+        with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
             json.dump(data, file)
         
 
