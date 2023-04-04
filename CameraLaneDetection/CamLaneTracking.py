@@ -33,8 +33,7 @@ class CamLaneTracking:
                 self.ultrasonicManager.emergencyStop = True
                 PWM.setMotorModel(0,0,0,0)
                 return
-            # else:
-            #     self.ultrasonicManager.emergencyStop = False
+ 
     
             self.error = abs(self.error)
 
