@@ -14,11 +14,11 @@ class CamLaneTracking:
             with open('CameraLaneDetection/PIDparameters.json', 'r') as file:
                 data = json.load(file)
 
-            DetectionDatafirst_time_loading=True
+            DetectionData.first_time_loading=True
 
-            DetectionDatafirst_time_loading.kp = data['kp']
-            DetectionDatafirst_time_loading.ki = data['ki']
-            DetectionDatafirst_time_loading.kd = data['kd']
+            DetectionData.kp = data['kp']
+            DetectionData.ki = data['ki']
+            DetectionData.kd = data['kd']
 
         # PID values
         self.kp = int(DetectionData.kp)
