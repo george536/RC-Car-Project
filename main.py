@@ -119,9 +119,10 @@ def main():
 
 def signal_handler(sig, frame):
 	# this ultasonic manager is not attached to any observers, we only need this to use the stop function
-    carCommands = CarCommands(UltrasonicManager())
+    #carCommands = CarCommands(UltrasonicManager())
     # Exit all threads
     for _ in range(4):
+        continue
         carCommands.stop()
     # Exit the main thread
     sys.exit()
