@@ -18,7 +18,7 @@ cv2.createTrackbar('HMax','image',0,179,nothing)
 cv2.createTrackbar('SMax','image',0,255,nothing)
 cv2.createTrackbar('VMax','image',0,255,nothing)
 
-with open('cameraParameters.json', 'r') as file:
+with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
     data = json.load(file)
 
 # Set default value trackbars.
