@@ -25,7 +25,7 @@ class CameraLaneDetection(Thread):
         while True:
             img = picam2.capture_array()
             img = cv2.resize(img, (240,320), interpolation = cv2.INTER_AREA)
-            img = img[240:,:]
+            #img = img[240:,:]
 
             lower = np.array([data['hMin'], data['sMin'], data['vMin']])
             upper = np.array([data['hMax'], data['sMax'], data['vMax']])
