@@ -21,8 +21,9 @@ class TrafficLightDetector(Thread):
                 upper_yellow = np.array([110, 255, 255])
 
                 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+                hsv_2 = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
                 redMask = cv2.inRange(hsv, lower_red, upper_red)
-                yellowMask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+                yellowMask = cv2.inRange(hsv_2, lower_yellow, upper_yellow)
                 
                 redContours, hierarchy = cv2.findContours(redMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
