@@ -4,6 +4,7 @@ from MQTT.topics import Topic
 from RcCarModules.led import Led
 from rpi_ws281x import *
 from CarControls.CarCommands import CarCommands
+from RcCarModules.Motor import *
 
 class CollisionDetection(UltrasonicObserver):
 	
@@ -27,6 +28,7 @@ class CollisionDetection(UltrasonicObserver):
 				self.likelihood = 0
 				self.observerManager.emergencyStop = True
 				self.carCommands.stop()
+				PWM.setMotorModel(0,0,0,0)
 				self.led.colorWipe(self.led.strip, Color(100, 0, 0))
 
 		else:
