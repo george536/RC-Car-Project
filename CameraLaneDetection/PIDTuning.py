@@ -36,6 +36,7 @@ def updateKp(kp):
     DetectionData.kp = kp
 
 def updateSpeed(testSpeed): 
+    
     DetectionData.testSpeed = float(testSpeed)
 
 class SliderInterface:
