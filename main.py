@@ -114,13 +114,37 @@ class MQTTRunner(Thread):
         self.mqttClient=mqttClient
         self.cars=cars
 
+
     def run(self):
         for car in self.cars:
             # listen for distances
             self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(car.idx)}", qos=1)
             self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(car.idx)}", qos=1)
-                                      
+                  
         self.mqttClient.loop_forever()
+        
+
+class TrafficSignal(Thread):
+    def __init__(self,mqttClient):
+        super().__init__()
+        self.mqttClient=mqttClient
+        # Traffic light timer
+        self.traffic_light_last_time = time.time()
+        self.traffic_light_period = 10
+        self.trafficFlow = {
+            'yellow': False,
+            'red':True
+        }
+
+    def run(self):
+        while True:
+            if (time.time() - self.traffic_light_last_time) >= self.traffic_light_period:
+                self.traffic_light_last_time = time.time()
+                self.trafficFlow['yellow'] = not self.trafficFlow['yellow']
+                self.trafficFlow['red'] = not self.trafficFlow['red']
+                self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}", payload=str(self.trafficFlow['yellow']), qos=1)
+                self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.RED.value)}", payload=str(self.trafficFlow['red']), qos=1)
+
 
 def main():
 
@@ -181,6 +205,8 @@ def main():
 
     mqttRunner = MQTTRunner(mqttClient,cars)
     threads.append(mqttRunner)
+
+    threads.append(TrafficSignal(mqttClient))
 
     for thread in threads:
         thread.start()

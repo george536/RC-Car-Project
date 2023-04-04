@@ -5,3 +5,6 @@ class Topic(enum.Enum):
     SPEED = 1
     DISTANCE = 2
     EMERGENCYSTOP = 3
+    TRAFFICLIGHT = 4
+    YELLOW = 5
+    RED = 6
