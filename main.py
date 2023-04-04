@@ -119,7 +119,7 @@ def main():
 
 
 def signal_handler(sig, frame):
-	carCommands = CarCommands(ultrasonicManager)
+    carCommands = CarCommands(ultrasonicManager)
     # Exit all threads
     for _ in range(4):
     	carCommands.stop()
