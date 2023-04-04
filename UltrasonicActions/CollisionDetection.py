@@ -15,7 +15,7 @@ class CollisionDetection(UltrasonicObserver):
 		self.minimum = stoppingDistance # distance in cm
 		self.led = Led()
 		self.likelihoodBound = likelihoodBound
-		self.carCommands = CarCommands(ultrasonicManager)
+		self.carCommands = CarCommands(observerManager)
 		
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
