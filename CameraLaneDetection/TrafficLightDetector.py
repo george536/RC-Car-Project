@@ -25,13 +25,14 @@ class TrafficLightDetector(Thread):
                 yellowMask = cv2.inRange(hsv, lower_yellow, upper_yellow)
                 
                 redContours, hierarchy = cv2.findContours(redMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-                yellowContours, hierarchy = cv2.findContours(yellowMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
                 if len(redContours)!=0:
                     print("red detected")
 
+                yellowContours, hierarchy = cv2.findContours(yellowMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
                 if len(yellowContours)!=0:
                     print("yellow detected")
-                    
+
             except:
                 continue
