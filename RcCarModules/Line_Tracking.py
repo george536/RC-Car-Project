@@ -55,7 +55,4 @@ class Line_Tracking:
             PWM.setMotorModel(-4000,-4000,2000,2000)
         elif self.LMR==7:
             PWM.setMotorModel(0,0,0,0)
-            # PWM.setMotorModel(0,0,0,0)
-            # PWM.setMotorModel(0,0,0,0)
-            # PWM.setMotorModel(0,0,0,0)
             

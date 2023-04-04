@@ -3,26 +3,31 @@ from MQTT.CarInfo import CarInfo
 from MQTT.topics import Topic
 from RcCarModules.led import Led
 from rpi_ws281x import *
+from CarControls.CarCommands import CarCommands
 
 class CollisionDetection(UltrasonicObserver):
 	
-	def __init__(self,observerManager):
+	def __init__(self,observerManager, stoppingDistance, likelihoodBound):
 		super().__init__()
 		self.observerManager = observerManager
 		observerManager.attach(self)
-		self.likelyhood = 0
-		self.minimum = 5 # default minimum distance in cm
+		self.likelihood = 0
+		self.minimum = stoppingDistance # distance in cm
 		self.led = Led()
+		self.likelihoodBound = likelihoodBound
 		
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
-		    self.likelyhood += 1
-		    if self.likelyhood >=7:
-			    self.likelyhood = 0
+
+		    self.likelihood += 1
+
+		    if self.likelihood >= self.likelihoodBound:
+
+			    self.likelihood = 0
 			    self.observerManager.emergencyStop = True
-			    PWM.setMotorModel(0,0,0,0)
-			    self.led.colorWipe(self.led.strip, Color(100, 0, 0))
-			    #print("Emergency Stop "+str(ultrasonic.get_distance()))
+			    CarCommands.stop()
+				self.led.colorWipe(self.led.strip, Color(100, 0, 0))
+
 		else:
 			if self.observerManager.emergencyStop == True:
 			    self.observerManager.emergencyStop = False  

@@ -1,6 +1,5 @@
 from CarControls.CarCommands import CarCommands
 from UltrasonicActions.CollisionDetection import CollisionDetection 
-#from UltrasonicActions.LeadCarDetection import LeadCarDetection 
 from UltrasonicActions.ObserverManager import ObserverManager as UltrasonicManager
 from PathTracking.LaneCentering import LaneCentering
 from PathTracking.ObserverManager import ObserverManager as PathManager
@@ -16,19 +15,7 @@ from MQTT.CarInfo import CarInfo
 from CameraLaneDetection.CameraLaneDetection import CameraLaneDetection
 from CameraLaneDetection.CamLaneTracking import CamLaneTracking
 from CameraLaneDetection.PIDTuning import SliderInterface
-
-
-# driving scenario thread
-class DrivingScenario(Thread):
-	def __init__(self,ultrasonicManager,egoCar):
-		super().__init__()
-		# ultrasonicManager manager is the observer that checks for emergency stops
-		self.ctrl = CarCommands(ultrasonicManager)
-		self.egoCar = egoCar
-		
-	def run(self):
-            while True:
-            	self.ctrl.DriveForward(speedScale.scaleToRC(self.egoCar.getSpeed()))
+import signal
 
 # Collision detection thread
 class detectCollision(Thread):
@@ -36,8 +23,12 @@ class detectCollision(Thread):
 		super().__init__()
 		
 		self.observerManager = ultrasonicManager
-		CollisionDetection(self.observerManager)
-		#LeadCarDetection(self.observerManager)
+
+		# modify these values to change settings of emergency stopping
+		stoppingDistance = 5
+		likelihoodBound=7
+
+		CollisionDetection(self.observerManager,stoppingDistance,likelihoodBound)
 		
 	def run(self):
 	
@@ -75,14 +66,13 @@ class CameraDetection(Thread):
 		while True:
 			self.CamLaneTracking.update()
 
-import tkinter as tk
+
 class Slider(Thread):
     def __init__(self):
         super().__init__()
 
     def run(self):
-        root = tk.Tk()
-        slider_interface = SliderInterface(root)
+        slider_interface = SliderInterface()
 
 
 # this class represents the car running this code
@@ -95,7 +85,6 @@ class Egocar:
 		return self.speed
 
 	def setSpeed(self,newSpeed):
-		#print(f"changing speed to {newSpeed}")
 		self.speed = newSpeed
 
 	def getScaledSpeed(self):
@@ -104,7 +93,7 @@ class Egocar:
 def main():
 	
     threads = []
-	# MQTT passed in to send data back to server
+
     ultrasonicManager = UltrasonicManager()
     pathManager = PathManager()
     egoCar = Egocar()
@@ -113,13 +102,13 @@ def main():
     global mqttClient
     mqttClient = mqtt.getClient()
 
-    #threads.append(DrivingScenario(ultrasonicManager,egoCar))
     threads.append(detectCollision(ultrasonicManager))
-    #threads.append(TrackingPath(pathManager,ultrasonicManager,egoCar))
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
-    #threads.append(Slider())
+
+    if "-testPID" in sys.argv:
+        threads.append(Slider())
 
 
     for thread in threads:
@@ -129,31 +118,11 @@ def main():
         thread.join()
 
 
-# try: 
-#     main()
-# except Exception as e:
-#     print(e)
-#     PWM.setMotorModel(0,0,0,0)
-#     PWM.setMotorModel(0,0,0,0)
-#     PWM.setMotorModel(0,0,0,0)
-#     PWM.setMotorModel(0,0,0,0)
-
-#     try:
-#         sys.exit(130)
-#     except SystemExit:
-#         os._exit(130)
-
-
-import signal
-
-
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
     # Exit all threads
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
-    PWM.setMotorModel(0,0,0,0)
+    for _ in range(4):
+    	CarCommands.stop()
     # Exit the main thread
     sys.exit()
     raise SystemExit

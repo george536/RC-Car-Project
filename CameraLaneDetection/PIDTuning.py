@@ -11,8 +11,8 @@ def updateSpeed(testSpeed):
     DetectionData.testSpeed = float(testSpeed)
 
 class SliderInterface:
-    def __init__(self, master):
-        self.master = master
+    def __init__(self):
+        master = tk.Tk()
         master.title("Slider Interface")
 
         # # Initialize variables
@@ -38,7 +38,7 @@ class SliderInterface:
         self.slider4.pack()
 
 
-        self.master.mainloop() 
+        master.mainloop() 
 
 
 

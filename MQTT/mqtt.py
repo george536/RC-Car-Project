@@ -9,9 +9,6 @@ from HelperFunctions.CalculateDistance import *
 class MQTTCommunication:
 
     def __init__(self,car,ultrasonicManager):
-        # using MQTT version 5 here, for 3.1.1: MQTTv311, 3.1: MQTTv31
-        # userdata is user defined data of any type, updated by user_data_set()
-        # client_id is the given name of the client
         self.client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv5)
         self.client.on_connect = self.on_connect
 
@@ -61,7 +58,6 @@ class MQTTCommunication:
                 client.publish(f"{str(Topic.Main.value)}/{str(Topic.DISTANCE.value)}/{str(CarInfo.carId)}", payload=str(0), qos=1)
                 client.publish(f"{str(Topic.Main.value)}/{str(Topic.EMERGENCYSTOP.value)}/{str(CarInfo.carId)}", payload=str(1), qos=1)
 
-        #print("Message :"+msg.topic + " " + str(msg.qos) + " " + str(msg.payload.decode()))
 
 
 

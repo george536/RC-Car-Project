@@ -9,10 +9,8 @@ class CamLaneTracking:
         self.egoCar = egoCar
 
         # PID values
-        # good was 22
         self.kp = int(DetectionData.kp)
         self.ki = int(DetectionData.ki)
-        # origionally 0.001
         self.kd = int(DetectionData.kd)
 
         self.error = 0
@@ -26,7 +24,7 @@ class CamLaneTracking:
             self.kd = int(DetectionData.kd)
 
             self.error = DetectionData.location
-            origionalError = DetectionData.location
+            origionalError = self.error
 
 
             if self.error == None:
@@ -37,25 +35,12 @@ class CamLaneTracking:
             else:
                 self.ultrasonicManager.emergencyStop = False
     
-            #print(self.error)
             self.error = abs(self.error)
-            
 
-            # if abs(self.error) > 45:
-            #     self.kp = 50
-            #     self.ki = 0.0001
-            #     self.kd = 0.9
-
-            # kp equation: 0.084x+21.43
-            # kd equation: 0.0538x+0.676
             speed = self.egoCar.getScaledSpeed()
-            # self.kp = (0.054*speed)+19.43
-            # self.ki = 0
-            # self.kd = (0.0538*speed)+0.676
 
-            # self.kp = 20
-            # self.ki = 0
-            # self.kd = 0.1
+            if DetectionData.testSpeed != None:
+                speed = DetectionData.testSpeed
             
             t = time.time()
             dt = t-self.last_time
@@ -64,7 +49,6 @@ class CamLaneTracking:
             self.integral += self.error * dt
             derivative =  self.kd * ( self.error -  self.previous_error) / dt
 
-            #  (self.integral * self.ki) causing NaN
             integral = (self.integral * self.ki)
 
             if math.isnan(integral):
@@ -78,27 +62,15 @@ class CamLaneTracking:
 
             self.previous_error = self.error
 
-            #print("Output by PId: "+str(output))
-
             output = int(output)
 
             if self.ultrasonicManager.getEmergencyStopState()==False :
-                #self.egoCar.speed = DetectionData.testSpeed
                 
                 speed_in_km = self.egoCar.getSpeed()
 
                 if int(speed_in_km) ==0:
                     PWM.setMotorModel(0,0,0,0)
                     return
-
-                # if speed_in_km > 40:
-                #     self.kp = 18
-                # else:
-                #     self.kp = 22
-
-                # speed reduction on curves
-                # if self.error > 25:
-                #     speed = int(speed * self.error/100)
 
                 fixValue = -speed+output
                 if (fixValue)>0:
@@ -110,9 +82,8 @@ class CamLaneTracking:
                     PWM.setMotorModel(fixValue,fixValue,-speed,-speed)
                     
             else:
-                #pass
                 self.egoCar.setSpeed(0)
 
-            time.sleep(0.005)
+            # time.sleep(0.005)
 
             self.last_time = time.time()
