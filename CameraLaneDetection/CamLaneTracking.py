@@ -1,5 +1,6 @@
 from .DetectionData import DetectionData
 from RcCarModules.Motor import *
+import HelperFunctions.SpeedScale
 import time
 import math
 
@@ -40,7 +41,7 @@ class CamLaneTracking:
             speed = self.egoCar.getScaledSpeed()
 
             if DetectionData.testSpeed != None:
-                speed = DetectionData.testSpeed
+                speed = SpeedScale.scaleToRC(DetectionData.testSpeed)
             
             t = time.time()
             dt = t-self.last_time
