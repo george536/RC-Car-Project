@@ -11,13 +11,13 @@ push_cmd = "git push"
 
 if "-calibrate" in sys.argv:
     os.system(calibration_cmd)
-    exit
+    exit()
 
 if "-save" in sys.argv:
     os.system(add_cmd)
     os.system(commit_cmd)
     os.system(push_cmd)
-    exit
+    exit()
 
 if "-testPID" in sys.argv:
     os.system(running_cmd+" -testPID")
