@@ -67,7 +67,6 @@ class CameraLaneDetection(Thread):
             middle = (img.shape[1]/2)
 
             if largest_area>400:
-                #off_value = -(middle-cx)
                 off_value = -((middle-cx)/middle)*100
             else:
                 off_value = None
