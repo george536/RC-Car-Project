@@ -8,7 +8,6 @@ from threading import Thread
 import time
 import sys
 import os
-from RcCarModules.Motor import *
 from MQTT.mqtt import MQTTCommunication
 from MQTT.topics import Topic
 from MQTT.CarInfo import CarInfo
@@ -119,6 +118,7 @@ def main():
 
 
 def signal_handler(sig, frame):
+	# this ultasonic manager is not attached to any observers, we only need this to use the stop function
     carCommands = CarCommands(UltrasonicManager())
     # Exit all threads
     for _ in range(4):
