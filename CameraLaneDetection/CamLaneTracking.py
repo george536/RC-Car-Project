@@ -3,11 +3,22 @@ from RcCarModules.Motor import *
 import HelperFunctions.SpeedScale as speedScale
 import time
 import math
+import json
 
 class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
         self.ultrasonicManager = ultrasonicManager
         self.egoCar = egoCar
+
+        if DetectionData.first_time_loading == False:
+            with open('CameraLaneDetection/PIDparameters.json', 'r') as file:
+                data = json.load(file)
+
+            DetectionDatafirst_time_loading=True
+
+            DetectionDatafirst_time_loading.kp = data['kp']
+            DetectionDatafirst_time_loading.ki = data['ki']
+            DetectionDatafirst_time_loading.kd = data['kd']
 
         # PID values
         self.kp = int(DetectionData.kp)
