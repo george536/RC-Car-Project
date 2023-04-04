@@ -25,7 +25,7 @@ class detectCollision(Thread):
 
 		# modify these values to change settings of emergency stopping
 		stoppingDistance = 5
-		likelihoodBound=7
+		likelihoodBound=1
 
 		CollisionDetection(self.observerManager,stoppingDistance,likelihoodBound)
 		
