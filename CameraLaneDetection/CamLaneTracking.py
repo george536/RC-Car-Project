@@ -69,7 +69,7 @@ class CamLaneTracking:
                 
                 speed_in_km = self.egoCar.getSpeed()
 
-                if int(speed_in_km) ==0:
+                if int(speed_in_km) ==0 and DetectionData.testSpeed == None:
                     PWM.setMotorModel(0,0,0,0)
                     return
 
