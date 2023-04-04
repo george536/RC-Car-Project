@@ -6,7 +6,7 @@ class Vars:
 
     # Vehicle Parameters
     length = 1.8
-    miniGap = 1.8
+    miniGap = 3
     initialMaxBraking = False
 
     # GIPPS Vehicle Parameters

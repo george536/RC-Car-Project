@@ -61,7 +61,6 @@ def update_randomness():
 
 def update_max_acceleration(value):
     v.max_acceleration = float(value)
-    print(f"new acceleartion {v.max_acceleration}")
 
 def update_efffective_size(value):
     v.efffective_size = float(value)

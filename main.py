@@ -10,6 +10,7 @@ from datetime import datetime
 import time
 from mqtt import MQTTCommunication
 from topics import Topic
+import sys
 
 MqttPeriod = 0.3
 
@@ -43,20 +44,21 @@ class ModelRunner(Thread):
 
         self.model = model
         self.cars = cars
-        self.log = "log.txt"
 
-        # csv header
-        header = ["Steps"]
+        global save_to_csv
+        if save_to_csv:
+            # csv header
+            header = ["Steps"]
 
-        # assigning car followers
-        for i in range(len(cars)-1):
-            cars[i].follower = cars[i+1]
-            # creating csv file header
-            header.append(f"Car {i+1}")
+            # assigning car followers
+            for i in range(len(cars)-1):
+                cars[i].follower = cars[i+1]
+                # creating csv file header
+                header.append(f"Car {i+1}")
 
-        header.append(f"Car {i+2}")
+            header.append(f"Car {i+2}")
 
-        insert_into_csv(header)
+            insert_into_csv(header)
 
         # craeting time steps for plot creation
         self.lastCheckPoint = datetime.now()
@@ -90,19 +92,20 @@ class ModelRunner(Thread):
                 # store speeds to be graphed
                 Vars.speeds[car.idx-1] = self.model.get_speed(car)
                 
-                # update distance recieved
-                # TO BE ADDED AFTER CAR CODE SENDS IT
-                #car.loc += Vars.over_mqtt_distances[car.idx-1]
-                #Vars.over_mqtt_distances[car.idx-1] = 0
 
             current = datetime.now()
             if (current - self.lastCheckPoint).total_seconds() >= 0.5:
                 data = [(current - self.initialCheckPoint).total_seconds()]
+
                 for i in range(len(Vars.speeds)):
                     print(f"car {i+1} speed "+str(Vars.speeds[i])+"\n")
-                    #print(f"car {i+1} location "+str(self.cars[i].loc)+"\n")
+
                     data.append(Vars.speeds[i])
-                insert_into_csv(data)
+                    
+                global save_to_csv
+                if save_to_csv:
+                    insert_into_csv(data)
+                    
                 self.lastCheckPoint = datetime.now()
 
 class MQTTRunner(Thread):
@@ -122,16 +125,47 @@ class MQTTRunner(Thread):
 def main():
 
     model = GippsModel()
-    car1 = Gipps_Vehicle(1, 50, model, None)
-    car2 = Gipps_Vehicle(2, 50, model, car1)
 
-    cars = [car1,car2]
+    initial_speed = 0
+    num_of_cars = 0
 
-    Vars.speeds = [0,0]
+    if "-#" in sys.argv:
+        try:
+            num_of_cars = int(sys.argv[sys.argv.index("-#") + 1])
+        except:
+            print("Invalid number of cars")
+            return
+    else:
+        print("you must enter the number of cars")
 
-    Vars.over_mqtt_distances = [0,0]
+    
+    if "-v" in sys.argv:
+        try:
+            initial_speed = int(sys.argv[sys.argv.index("-v") + 1])
+        except:
+            print("Invalid speed")
+            return
 
-    Vars.over_mqtt_emergency_stops = [0,0]
+    global save_to_csv
+    save_to_csv = False
+
+    if "-csv" in sys.argv:
+        save_to_csv = True
+
+    cars = []
+    for i in range(num_of_cars):
+
+        lead = None
+        if i > 0:
+            lead = cars[i-1]
+
+        cars.append(Gipps_Vehicle(i+1, initial_speed, model, lead))
+
+        Vars.speeds.append(0)
+
+        Vars.over_mqtt_distances.append(0)
+
+        Vars.over_mqtt_emergency_stops.append(0)
 
     threads = []
 

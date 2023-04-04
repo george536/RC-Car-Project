@@ -66,7 +66,8 @@ class Vehicle:
         if self.leader:
             spacing = self.leader.loc - self.loc - self.leader.length
             if spacing <= 0:
-                print("Vehicle", self.idx, "hit the leader vehicle!")
+                pass
+                #print("Vehicle", self.idx, "hit the leader vehicle!")
         if self.time_pass_zero == None and self.loc >= 0:
             self.time_pass_zero = self.simTime
             self.headway_pass_zero = self.h

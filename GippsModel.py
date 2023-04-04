@@ -31,10 +31,6 @@ class GippsModel:
         except: return 0
         if inside_sqrt<=0:
             #print("free travel error",inside_sqrt, car.v, car.vi)
-            ######### added by George #########
-            #car.v = 1
-            #inside_sqrt=1
-            ######### added by George #########
             #return car.v
             return 0
         return car.v + 2.5 * car.an * car.tn * (1 - car.v / car.vi) * sqrt(inside_sqrt)
@@ -45,10 +41,6 @@ class GippsModel:
             (car.leader.v**2) / car.b_hat)
         if inside_sqrt <= 0:
             #print("car following error", inside_sqrt, car.v, car.vi)
-            ######### added by George #########
-            #inside_sqrt = 0
-            #car.v = 0
-            ######### added by George #########
             #return car.bn * car.tn
             return 0
         return car.bn * car.tn  + sqrt(inside_sqrt)
