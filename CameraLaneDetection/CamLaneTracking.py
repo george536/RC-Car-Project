@@ -96,6 +96,6 @@ class CamLaneTracking:
                 PWM.setMotorModel(0,0,0,0)
                 self.egoCar.setSpeed(0)
 
-            # time.sleep(0.005)
+            time.sleep(0.005)
 
             self.last_time = time.time()
