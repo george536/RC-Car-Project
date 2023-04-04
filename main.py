@@ -110,8 +110,6 @@ def main():
     if "-testPID" in sys.argv:
         threads.append(Slider())
 
-    carCommands = CarCommands(ultrasonicManager)
-
 
     for thread in threads:
         thread.start()
@@ -121,7 +119,7 @@ def main():
 
 
 def signal_handler(sig, frame):
-    print('You pressed Ctrl+C!')
+	carCommands = CarCommands(ultrasonicManager)
     # Exit all threads
     for _ in range(4):
     	carCommands.stop()
