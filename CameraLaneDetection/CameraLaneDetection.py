@@ -20,10 +20,6 @@ class CameraLaneDetection(Thread):
 
         with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
             data = json.load(file)
-    
-        prev_vals = []
-        prev = 0
-        counter = 0
 
 
         while True:
