@@ -107,6 +107,7 @@ def main():
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
     threads.append(TrafficLightDetector())
+	
 
     if "-testPID" in sys.argv:
         threads.append(Slider())
