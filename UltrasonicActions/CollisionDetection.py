@@ -26,7 +26,7 @@ class CollisionDetection(UltrasonicObserver):
 			    self.likelihood = 0
 			    self.observerManager.emergencyStop = True
 			    CarCommands.stop()
-				self.led.colorWipe(self.led.strip, Color(100, 0, 0))
+			    self.led.colorWipe(self.led.strip, Color(100, 0, 0))
 
 		else:
 			if self.observerManager.emergencyStop == True:
