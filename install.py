@@ -1,4 +1,5 @@
 import os
+import time
 commands = [
     'sudo pip install smbus',
     'sudo pip install RPi.GPIO',
@@ -11,3 +12,4 @@ commands = [
 
 for cmd in commands:
     os.system(cmd)
+    time.sleep(0.5)
