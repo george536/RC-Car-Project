@@ -27,10 +27,10 @@ class DetectionData:
         currentlyAt = DetectionData.currentlyAt
         CurrentTraffic = DetectionData.CurrentTraffic
 
-        if currentlyAt['yellow'] and CurrentTraffic['yellow']:
+        if currentlyAt['yellow'] and not CurrentTraffic['yellow']:
             print("stopped at yellow")
             return True
-        elif currentlyAt['red'] and CurrentTraffic['red']:
+        elif currentlyAt['red'] and not CurrentTraffic['red']:
             print("stopped at red")
             return True
         else:
