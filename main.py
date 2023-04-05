@@ -104,7 +104,7 @@ def main():
     global mqttClient
     mqttClient = mqtt.getClient()
 
-    threads.append(detectCollision(ultrasonicManager))
+    #threads.append(detectCollision(ultrasonicManager))
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
