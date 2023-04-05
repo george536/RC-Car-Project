@@ -69,10 +69,8 @@ class MQTTCommunication:
 
         if red_pattern==msg.topic:
             DetectionData.CurrentTraffic['red'] = bool(msg.payload.decode())
+        elif yellow_pattern==msg.topic:
             DetectionData.CurrentTraffic['yellow'] = bool(msg.payload.decode())
-        if yellow_pattern==msg.topic:
-            DetectionData.CurrentTraffic['yellow'] = bool(msg.payload.decode())
-            DetectionData.CurrentTraffic['red'] = bool(msg.payload.decode())
 
 
 
