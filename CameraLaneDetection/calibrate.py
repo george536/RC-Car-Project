@@ -107,19 +107,20 @@ def main():
     cv2.destroyAllWindows()
 
 
-def signal_handler(sig, frame):
-	# this ultasonic manager is not attached to any observers, we only need this to use the stop function
+if __name__=="__main__":
+    def signal_handler(sig, frame):
+        # this ultasonic manager is not attached to any observers, we only need this to use the stop function
 
-    global data
-    with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
-        json.dump(data, file)
-        
+        global data
+        with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
+            json.dump(data, file)
+            
 
-    # Exit the main thread
-    sys.exit()
-    raise SystemExit
+        # Exit the main thread
+        sys.exit()
+        raise SystemExit
 
 
-signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
 
-main()
+    main()
