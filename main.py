@@ -56,7 +56,7 @@ class MQTTRunner(Thread):
 	def run(self):
 		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.SPEED.value)}/{str(CarInfo.carId)}", qos=1)
 		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.RED.value)}", qos=1)
-		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}", qos=1)
+		self.mqttClient.subscribe(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}", qos=2)
 		self.mqttClient.loop_forever()
 
 class CameraDetection(Thread):
