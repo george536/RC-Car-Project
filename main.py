@@ -25,8 +25,8 @@ class detectCollision(Thread):
 		self.observerManager = ultrasonicManager
 
 		# modify these values to change settings of emergency stopping
-		stoppingDistance = 5
-		likelihoodBound=5
+		stoppingDistance = 8
+		likelihoodBound=3
 
 		CollisionDetection(self.observerManager,stoppingDistance,likelihoodBound)
 		
