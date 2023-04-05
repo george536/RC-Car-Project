@@ -29,6 +29,9 @@ class DetectionData:
         currentlyAt = DetectionData.currentlyAt
         CurrentTraffic = DetectionData.CurrentTraffic
 
+        print(currentlyAt)
+        print(CurrentTraffic)
+
         if currentlyAt['yellow'] and not CurrentTraffic['yellow']:
             print(f"stopped at yellow {time.time()}")
             return True

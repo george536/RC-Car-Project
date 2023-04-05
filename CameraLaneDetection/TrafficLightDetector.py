@@ -35,6 +35,7 @@ class TrafficLightDetector(Thread):
                         if area > largest_area:
                             largest_area = area
                             largest_contour = contour
+                            
                     if largest_area>400:
                         DetectionData.currentlyAt['red'] = True
                     else:
