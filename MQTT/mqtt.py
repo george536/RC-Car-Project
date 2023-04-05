@@ -66,10 +66,10 @@ class MQTTCommunication:
         yellow_pattern = f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}"
         
         if red_pattern==msg.topic:
-            print("receiving red")
+            print(f"receiving red {msg.payload.decode()}")
             DetectionData.CurrentTraffic['red'] = bool(msg.payload.decode())
         elif yellow_pattern==msg.topic:
-            print("receiving yellow")
+            print(f"receiving yellow {msg.payload.decode()}")
             DetectionData.CurrentTraffic['yellow'] = bool(msg.payload.decode())
 
 
