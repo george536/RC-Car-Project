@@ -39,6 +39,8 @@ class TrafficLightDetector(Thread):
                         DetectionData.currentlyAt['red'] = True
                     else:
                         DetectionData.currentlyAt['red'] = False
+                else:
+                    DetectionData.currentlyAt['red'] = False
 
 
                 yellowContours, hierarchy = cv2.findContours(yellowMask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -55,6 +57,8 @@ class TrafficLightDetector(Thread):
                         DetectionData.currentlyAt['yellow'] = True
                     else:
                         DetectionData.currentlyAt['yellow'] = False
+                else:
+                    DetectionData.currentlyAt['yellow'] = False
 
 
             except:
