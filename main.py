@@ -130,7 +130,7 @@ class TrafficSignal(Thread):
         self.mqttClient=mqttClient
         # Traffic light timer
         self.traffic_light_last_time = time.time()
-        self.traffic_light_period = 10
+        self.traffic_light_period = 3
         self.trafficFlow = {
             'yellow': False,
             'red':True
@@ -143,7 +143,7 @@ class TrafficSignal(Thread):
                 self.trafficFlow['yellow'] = not self.trafficFlow['yellow']
                 self.trafficFlow['red'] = not self.trafficFlow['red']
                 self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}", payload=str(self.trafficFlow['yellow']), qos=1)
-                self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.RED.value)}", payload=str(self.trafficFlow['red']), qos=1)
+                self.mqttClient.publish(f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.RED.value)}", payload=str(self.trafficFlow['red']), qos=2)
 
 
 def main():
