@@ -15,7 +15,7 @@ class TrafficLightDetector(Thread):
 
             try:
 
-                lower_red = np.array([111, 69, 161])
+                lower_red = np.array([95, 69, 161])
                 upper_red = np.array([174, 255, 255])
                 lower_yellow = np.array([64, 46, 155])
                 upper_yellow = np.array([110, 255, 255])
