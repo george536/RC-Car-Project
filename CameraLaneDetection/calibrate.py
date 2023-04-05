@@ -87,6 +87,8 @@ if __name__ == '__main__':
                 largest_area = area
                 largest_contour = contour
 
+        print(f"Biggest Countour Area {largest_area}")
+
         cnt = largest_contour
         M = cv2.moments(cnt)
         moment_0 = M['m00']
