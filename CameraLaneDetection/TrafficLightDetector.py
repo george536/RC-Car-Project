@@ -17,7 +17,7 @@ class TrafficLightDetector(Thread):
 
                 lower_red = np.array([111, 69, 161])
                 upper_red = np.array([174, 255, 255])
-                lower_yellow = np.array([64, 98, 132])
+                lower_yellow = np.array([64, 46, 155])
                 upper_yellow = np.array([110, 255, 255])
 
                 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)

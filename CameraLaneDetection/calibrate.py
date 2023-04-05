@@ -6,6 +6,8 @@ from picamera2 import Picamera2
 picam2 = Picamera2()
 picam2.start()
 
+data = {}
+
 def nothing(input):pass
 
 cv2.namedWindow('image')
@@ -35,9 +37,9 @@ hMin ,sMin , vMin = data['hMin'], data['sMin'], data['vMin']
 hMax , sMax , vMax = data['hMax'], data['sMax'], data['vMax']
 phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
 
+def main():
+    global data
     with open('CameraLaneDetection/cameraParameters.json', 'r') as file:
         data = json.load(file)
 
@@ -58,6 +60,8 @@ if __name__ == '__main__':
         lower = np.array([hMin, sMin, vMin])
         upper = np.array([hMax, sMax, vMax])
 
+        global data
+
         data['hMin'] = hMin
         data['sMin'] = sMin
         data['vMin'] = vMin
@@ -65,9 +69,6 @@ if __name__ == '__main__':
         data['sMax'] = sMax
         data['vMax'] = vMax
 
-        with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
-            json.dump(data, file)
-        
 
         # Create HSV Image and threshold into a range.
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -107,3 +108,21 @@ if __name__ == '__main__':
 
     video_cap.release()
     cv2.destroyAllWindows()
+
+
+def signal_handler(sig, frame):
+	# this ultasonic manager is not attached to any observers, we only need this to use the stop function
+
+    global data
+    with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
+        json.dump(data, file)
+        
+
+    # Exit the main thread
+    sys.exit()
+    raise SystemExit
+
+
+signal.signal(signal.SIGINT, signal_handler)
+
+main()
