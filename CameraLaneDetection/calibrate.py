@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import json
 from picamera2 import Picamera2
+import signal
 
 picam2 = Picamera2()
 picam2.start()
