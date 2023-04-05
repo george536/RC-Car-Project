@@ -33,7 +33,7 @@ class DetectionData:
             print(f"stopped at yellow {time.time()}")
             return True
         elif currentlyAt['red'] and not CurrentTraffic['red']:
-            print(f"stopped at red }{time.time()}")
+            print(f"stopped at red {time.time()}")
             return True
         else:
             return False
