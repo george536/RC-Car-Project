@@ -29,8 +29,8 @@ class DetectionData:
         currentlyAt = DetectionData.currentlyAt
         CurrentTraffic = DetectionData.CurrentTraffic
 
-        #print("currently at" + str(currentlyAt))
-        #print("current mqtt traffic"+str(CurrentTraffic))
+        print("currently at" + str(currentlyAt))
+        print("current mqtt traffic"+str(CurrentTraffic))
 
         if currentlyAt['yellow'] and not CurrentTraffic['yellow']:
             print(f"stopped at yellow {time.time()}")
