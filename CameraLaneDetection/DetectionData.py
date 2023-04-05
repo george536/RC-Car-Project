@@ -1,3 +1,5 @@
+import time
+
 class DetectionData:
 
     location = 0
@@ -28,10 +30,10 @@ class DetectionData:
         CurrentTraffic = DetectionData.CurrentTraffic
 
         if currentlyAt['yellow'] and not CurrentTraffic['yellow']:
-            print("stopped at yellow")
+            print(f"stopped at yellow {time.time()}")
             return True
         elif currentlyAt['red'] and not CurrentTraffic['red']:
-            print("stopped at red")
+            print(f"stopped at red }{time.time()}")
             return True
         else:
             return False
