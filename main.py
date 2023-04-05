@@ -108,7 +108,7 @@ def main():
     threads.append(MQTTRunner(mqttClient))
     threads.append(CameraLaneDetection())
     threads.append(CameraDetection(ultrasonicManager,egoCar))
-    #threads.append(TrafficLightDetector())
+    threads.append(TrafficLightDetector())
 	
 
     if "-testPID" in sys.argv:
