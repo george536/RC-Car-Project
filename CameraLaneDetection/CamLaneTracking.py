@@ -75,7 +75,7 @@ class CamLaneTracking:
 
             output = int(output)
 
-            if self.ultrasonicManager.getEmergencyStopState()==False or not DetectionData.isStoppedAtTraffic():
+            if self.ultrasonicManager.getEmergencyStopState()==False and not DetectionData.isStoppedAtTraffic():
                 
                 speed_in_km = self.egoCar.getSpeed()
 
