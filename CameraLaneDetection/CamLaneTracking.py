@@ -41,7 +41,6 @@ class CamLaneTracking:
 
             if self.error == None:
                 self.egoCar.setSpeed(0)
-                self.ultrasonicManager.emergencyStop = True
                 PWM.setMotorModel(0,0,0,0)
                 return
  
