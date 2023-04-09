@@ -1,5 +1,7 @@
 main: RC car code
-controlsUI: Gipps Model Controller code
+
+
+ControlsUI: Gipps Model Controller code
 
 ## Setting Up a Virtual Environment (Important)
 
