@@ -30,6 +30,9 @@ class MQTTCommunication:
 
     def getClient(self):
         return self.client
+    
+    def str_to_bool(self,s):
+        return s.lower() == "true"
 
     # setting callbacks for different events to see if it works, print the message etc.
     def on_connect(self,client, userdata, flags, rc, properties=None):
@@ -66,9 +69,9 @@ class MQTTCommunication:
         yellow_pattern = f"{str(Topic.Main.value)}/{str(Topic.TRAFFICLIGHT.value)}/{str(Topic.YELLOW.value)}"
         
         if red_pattern==msg.topic:
-            DetectionData.CurrentTraffic['red'] = msg.payload.decode()
+            DetectionData.CurrentTraffic['red'] = self.str_to_bool(msg.payload.decode())
         elif yellow_pattern==msg.topic:
-            DetectionData.CurrentTraffic['yellow'] = msg.payload.decode()
+            DetectionData.CurrentTraffic['yellow'] = self.str_to_bool(msg.payload.decode())
 
 
 
