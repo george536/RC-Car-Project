@@ -1,3 +1,6 @@
+main: RC car code
+controlsUI: Gipps Model Controller code
+
 ## Setting Up a Virtual Environment (Important)
 
 1. Install the `virtualenv` package by running `pip install virtualenv` in your terminal.
