@@ -1,5 +1,6 @@
 import time
 
+# Global data used by the PID and calibration as well as traffic manager
 class DetectionData:
 
     location = 0

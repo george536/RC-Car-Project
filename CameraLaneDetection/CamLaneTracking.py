@@ -5,6 +5,8 @@ import time
 import math
 import json
 
+# This class handles all the PID controller calculations
+# If RC car is changed, this code would be most affected, simply change RC mtoor module
 class CamLaneTracking:
     def __init__(self,ultrasonicManager,egoCar):
         self.ultrasonicManager = ultrasonicManager
@@ -64,6 +66,7 @@ class CamLaneTracking:
             if math.isnan(integral):
                 integral = 0
 
+            # Capping the integral part so it does not blow up
             if integral!=0:
                 integral = min(integral, 2000)
                 integral = max(integral, -2000)
@@ -82,6 +85,7 @@ class CamLaneTracking:
                     PWM.setMotorModel(0,0,0,0)
                     return
 
+                # value adjustment to apply to the motor
                 fixValue = -speed+output
                 if (fixValue)>0:
                     fixValue = 0

@@ -35,6 +35,7 @@ class CameraLaneDetection(Thread):
             mask = cv2.inRange(hsv, lower, upper)
             
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            # next command removed to enhance computation speed
             #cv2.drawContours(img, contours, -1, (0,255,0), 3)
             
             if len(contours)==0:
@@ -57,6 +58,7 @@ class CameraLaneDetection(Thread):
             cx = int(M['m10'] / moment_0)
             cy = int(M['m01'] / moment_0)
 
+            # next command removed to enhance computation speed
             #cv2.circle(img, (cx, cy), 1, (0, 0, 255), 3)
             #cv2.imshow('image', img)
 
@@ -66,6 +68,8 @@ class CameraLaneDetection(Thread):
 
             middle = (img.shape[1]/2)
 
+            # 400 has found to be about minimum area of the tape that the camera can see
+            # chaneg if needed
             if largest_area>400:
                 off_value = -((middle-cx)/middle)*100
             else:

@@ -1,6 +1,7 @@
 
 from RcCarModules.Motor import *
-
+# These functions were not used, only the stop function
+# Please do not use this code as it has no usueful use, was initially used for testing
 class CarCommands:
 	
 	def __init__(self, ultrasonicManager):

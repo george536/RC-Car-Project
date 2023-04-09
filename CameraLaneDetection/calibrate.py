@@ -87,7 +87,6 @@ def main():
                 largest_area = area
                 largest_contour = contour
 
-        print(f"Biggest Countour Area {largest_area}")
 
         cnt = largest_contour
         M = cv2.moments(cnt)
@@ -113,6 +112,7 @@ if __name__=="__main__":
     def signal_handler(sig, frame):
         # this ultasonic manager is not attached to any observers, we only need this to use the stop function
 
+        # save all calibrations on exit
         global data
         with open('CameraLaneDetection/cameraParameters.json', 'w') as file:
             json.dump(data, file)

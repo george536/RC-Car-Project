@@ -19,7 +19,7 @@ class CollisionDetection(UltrasonicObserver):
 		
 	def update(self):
 		if ultrasonic.get_distance() <=self.minimum:
-
+			# the likelihood is used because the sensor has lot of noise
 			self.likelihood += 1
 
 			if self.likelihood >= self.likelihoodBound:

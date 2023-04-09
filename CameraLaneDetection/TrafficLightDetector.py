@@ -15,8 +15,12 @@ class TrafficLightDetector(Thread):
 
             try:
 
+                # red filter
+                # Change if needed, use calibration tool to isolate this color then store values here
                 lower_red = np.array([95, 69, 161])
                 upper_red = np.array([174, 255, 255])
+                # yellow filter
+                # Change if needed, use calibration tool to isolate this color then store values here
                 lower_yellow = np.array([64, 46, 155])
                 upper_yellow = np.array([110, 255, 255])
 

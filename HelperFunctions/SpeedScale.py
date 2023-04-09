@@ -1,5 +1,8 @@
 from .ScalingParameters import ScalingParameters
 
+# this is simply like a liear fucntion that scales the speed from km/h to PWM
+# To ensure all RC cars have the same real speed, ensure the batteries are fully
+# charged before running the mode :(
 def scaleToRC(speed):
 
     if speed <1:

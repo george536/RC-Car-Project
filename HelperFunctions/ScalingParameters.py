@@ -1,4 +1,5 @@
 
+# to change RC scaling, alter values below, but be careful what to change
 class ScalingParameters:
 
     # 120 km/hr is max

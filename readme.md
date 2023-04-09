@@ -1,4 +1,4 @@
-## Setting Up a Virtual Environment
+## Setting Up a Virtual Environment (Important)
 
 1. Install the `virtualenv` package by running `pip install virtualenv` in your terminal.
 

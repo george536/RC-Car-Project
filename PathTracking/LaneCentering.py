@@ -2,7 +2,7 @@ from .PathObserver import *
 from .Positions import Position
 from CarControls.CarCommands import *
 from RcCarModules.Motor import *
-
+# Currently not used, this is for the stock tracking module
 class LaneCentering(PathObserver):
 	
 	def __init__(self,observerManager,ultrasonicManager,egoCar):
