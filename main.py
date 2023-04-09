@@ -12,8 +12,10 @@ from mqtt import MQTTCommunication
 from topics import Topic
 import sys
 
+# refresh period
 MqttPeriod = 0.3
 
+# saves speed vs time into csv, and can be plotted
 def insert_into_csv(data):
     if not os.path.exists("plot.csv"):
         with open("plot.csv", 'w', newline='') as file:
@@ -123,13 +125,14 @@ class MQTTRunner(Thread):
                   
         self.mqttClient.loop_forever()
         
-
+# Traffic manager
 class TrafficSignal(Thread):
     def __init__(self,mqttClient):
         super().__init__()
         self.mqttClient=mqttClient
         # Traffic light timer
         self.traffic_light_last_time = time.time()
+        # this is the traffic maanger period
         self.traffic_light_period = 3
         self.trafficFlow = {
             'yellow': False,
@@ -153,6 +156,7 @@ def main():
     initial_speed = 0
     num_of_cars = 0
 
+    # number of cars are passed as options
     if "-#" in sys.argv:
         try:
             num_of_cars = int(sys.argv[sys.argv.index("-#") + 1])
@@ -162,7 +166,7 @@ def main():
     else:
         print("you must enter the number of cars")
 
-    
+    # initial target speed is passed as an option, otherwise starts at 0
     if "-v" in sys.argv:
         try:
             initial_speed = int(sys.argv[sys.argv.index("-v") + 1])
