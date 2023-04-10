@@ -21,8 +21,8 @@ class DetectionData:
     }
 
     CurrentTraffic = {
-        'yellow':False,
-        'red':False,
+        'yellow':True,
+        'red':True,
     }
     
 
